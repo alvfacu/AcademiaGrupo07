@@ -1,0 +1,11 @@
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\bin\UI.Web.dll
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\bin\UI.Web.pdb
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\obj\Debug\UI.Web.dll
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\obj\Debug\UI.Web.pdb
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\bin\Business.Entities.dll
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\bin\Negocio.dll
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\bin\Data.Database.dll
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\bin\Business.Entities.pdb
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\bin\Negocio.pdb
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\bin\Data.Database.pdb
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\obj\Debug\UI.Web.csprojResolveAssemblyReference.cache

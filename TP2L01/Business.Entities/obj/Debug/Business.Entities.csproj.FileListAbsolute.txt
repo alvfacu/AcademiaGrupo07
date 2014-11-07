@@ -1,0 +1,14 @@
+C:\Documents and Settings\usrmiclab\Escritorio\note\TP2\TP2L01\Business.Entities\bin\Debug\Business.Entities.dll
+C:\Documents and Settings\usrmiclab\Escritorio\note\TP2\TP2L01\Business.Entities\bin\Debug\Business.Entities.pdb
+C:\Documents and Settings\usrmiclab\Escritorio\note\TP2\TP2L01\Business.Entities\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\usrmiclab\Escritorio\note\TP2\TP2L01\Business.Entities\obj\Debug\Business.Entities.dll
+C:\Documents and Settings\usrmiclab\Escritorio\note\TP2\TP2L01\Business.Entities\obj\Debug\Business.Entities.pdb
+C:\Documents and Settings\Florencia\Escritorio\TP2\TP2L01\Business.Entities\bin\Debug\Business.Entities.dll
+C:\Documents and Settings\Florencia\Escritorio\TP2\TP2L01\Business.Entities\bin\Debug\Business.Entities.pdb
+C:\Documents and Settings\Florencia\Escritorio\TP2\TP2L01\Business.Entities\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Florencia\Escritorio\TP2\TP2L01\Business.Entities\obj\Debug\Business.Entities.dll
+C:\Documents and Settings\Florencia\Escritorio\TP2\TP2L01\Business.Entities\obj\Debug\Business.Entities.pdb
+C:\Users\Facundo\Desktop\Net\TP2\TP2L01\Business.Entities\bin\Debug\Business.Entities.dll
+C:\Users\Facundo\Desktop\Net\TP2\TP2L01\Business.Entities\bin\Debug\Business.Entities.pdb
+C:\Users\Facundo\Desktop\Net\TP2\TP2L01\Business.Entities\obj\Debug\Business.Entities.dll
+C:\Users\Facundo\Desktop\Net\TP2\TP2L01\Business.Entities\obj\Debug\Business.Entities.pdb

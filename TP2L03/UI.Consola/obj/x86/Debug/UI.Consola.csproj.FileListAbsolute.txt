@@ -1,0 +1,11 @@
+C:\Users\Facundo\Desktop\Net\TP2\TP2L03\UI.Consola\obj\x86\Debug\UI.Consola.csprojResolveAssemblyReference.cache
+C:\Users\Facundo\Desktop\Net\TP2\TP2L03\UI.Consola\bin\Debug\UI.Consola.exe
+C:\Users\Facundo\Desktop\Net\TP2\TP2L03\UI.Consola\bin\Debug\UI.Consola.pdb
+C:\Users\Facundo\Desktop\Net\TP2\TP2L03\UI.Consola\bin\Debug\Business.Entities.dll
+C:\Users\Facundo\Desktop\Net\TP2\TP2L03\UI.Consola\bin\Debug\Negocio.dll
+C:\Users\Facundo\Desktop\Net\TP2\TP2L03\UI.Consola\bin\Debug\Data.Database.dll
+C:\Users\Facundo\Desktop\Net\TP2\TP2L03\UI.Consola\bin\Debug\Business.Entities.pdb
+C:\Users\Facundo\Desktop\Net\TP2\TP2L03\UI.Consola\bin\Debug\Negocio.pdb
+C:\Users\Facundo\Desktop\Net\TP2\TP2L03\UI.Consola\bin\Debug\Data.Database.pdb
+C:\Users\Facundo\Desktop\Net\TP2\TP2L03\UI.Consola\obj\x86\Debug\UI.Consola.exe
+C:\Users\Facundo\Desktop\Net\TP2\TP2L03\UI.Consola\obj\x86\Debug\UI.Consola.pdb
