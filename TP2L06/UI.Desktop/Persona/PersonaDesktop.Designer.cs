@@ -66,7 +66,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.89706F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.10294F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 123F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 265F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 266F));
             this.tableLayoutPanel1.Controls.Add(this.lblID, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblNombre, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblApellido, 2, 1);
@@ -241,7 +241,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.93548F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel2.Controls.Add(this.txtDia, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtMes, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtAño, 4, 0);
@@ -259,7 +259,7 @@
             this.txtDia.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtDia.Location = new System.Drawing.Point(3, 3);
             this.txtDia.Name = "txtDia";
-            this.txtDia.Size = new System.Drawing.Size(27, 20);
+            this.txtDia.Size = new System.Drawing.Size(25, 20);
             this.txtDia.TabIndex = 6;
             this.txtDia.Text = "DD";
             this.txtDia.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -267,7 +267,7 @@
             // txtMes
             // 
             this.txtMes.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtMes.Location = new System.Drawing.Point(60, 3);
+            this.txtMes.Location = new System.Drawing.Point(56, 3);
             this.txtMes.Name = "txtMes";
             this.txtMes.Size = new System.Drawing.Size(32, 20);
             this.txtMes.TabIndex = 7;
@@ -277,7 +277,7 @@
             // txtAño
             // 
             this.txtAño.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtAño.Location = new System.Drawing.Point(153, 3);
+            this.txtAño.Location = new System.Drawing.Point(151, 3);
             this.txtAño.Name = "txtAño";
             this.txtAño.Size = new System.Drawing.Size(64, 20);
             this.txtAño.TabIndex = 8;
@@ -288,7 +288,7 @@
             // 
             this.barra1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.barra1.AutoSize = true;
-            this.barra1.Location = new System.Drawing.Point(39, 6);
+            this.barra1.Location = new System.Drawing.Point(36, 6);
             this.barra1.Name = "barra1";
             this.barra1.Size = new System.Drawing.Size(12, 13);
             this.barra1.TabIndex = 3;
@@ -298,7 +298,7 @@
             // 
             this.barra2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.barra2.AutoSize = true;
-            this.barra2.Location = new System.Drawing.Point(105, 6);
+            this.barra2.Location = new System.Drawing.Point(101, 6);
             this.barra2.Name = "barra2";
             this.barra2.Size = new System.Drawing.Size(12, 13);
             this.barra2.TabIndex = 4;

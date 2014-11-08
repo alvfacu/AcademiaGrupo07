@@ -72,7 +72,7 @@ namespace UI.Desktop
             this.txtDescripcion.Text = this.MateriaActual.Descripcion.ToString();
             this.txtHSSemanales.Text = this.MateriaActual.HSSemanales.ToString();
             this.txtHSTotales.Text = this.MateriaActual.HSTotales.ToString();
-            this.cmbIDPlan.Text = this.MateriaActual.IDPlan.ToString();
+            //no sale combobox
         }
 
         public virtual void GuardarCambios()
@@ -83,7 +83,7 @@ namespace UI.Desktop
 
         public virtual void MapearADatos()
         {
-
+            Business.Entities.Plan planActual = this.DevolverPlan();
             switch (this.Modo)
             {
                 case (ModoForm.Alta):
@@ -92,7 +92,7 @@ namespace UI.Desktop
                         this.MateriaActual.Descripcion = this.txtDescripcion.Text;
                         this.MateriaActual.HSSemanales = int.Parse(this.txtHSSemanales.Text);
                         this.MateriaActual.HSTotales = int.Parse(this.txtHSTotales.Text);
-                        this.MateriaActual.IDPlan = DevolverIDPlan(this.cmbIDPlan.Text);
+                        this.MateriaActual.IDPlan = planActual.ID;
                         this.MateriaActual.State = BusinessEntity.States.New;
                         break;
                     }
@@ -101,7 +101,7 @@ namespace UI.Desktop
                         this.MateriaActual.Descripcion = this.txtDescripcion.Text;
                         this.MateriaActual.HSSemanales = int.Parse(this.txtHSSemanales.Text);
                         this.MateriaActual.HSTotales = int.Parse(this.txtHSTotales.Text);
-                        this.MateriaActual.IDPlan = DevolverIDPlan(this.cmbIDPlan.Text);
+                        this.MateriaActual.IDPlan = planActual.ID;
                         this.MateriaActual.State = BusinessEntity.States.Modified;
                         break;
                     }
@@ -118,22 +118,11 @@ namespace UI.Desktop
             }
         }
 
-        private int DevolverIDPlan(string p)
+        private Plan DevolverPlan()
         {
-            List<Plan> planes = new PlanLogic().GetAll();
-            int id = 0;
-
-            foreach (Plan pl in planes)
-            {
-                if (String.Compare(p, pl.Descripcion, true) == 0)
-                {
-                    id = pl.ID;
-                }
-            }
-
-            return id;
+            return new PlanLogic().GetOne(((Business.Entities.Plan)this.cmbIDPlan.SelectedValue).ID);
         }
-
+        
         public virtual bool Validar()
         {
             Boolean estado = true;
@@ -218,13 +207,9 @@ namespace UI.Desktop
 
         private void MateriasDesktop_Load(object sender, EventArgs e)
         {
-            List<Plan> listaPlanes = new PlanLogic().GetAll();
-            List<String> planes = new List<String>();
-            foreach (Plan pl in listaPlanes)
-            {
-                planes.Add(pl.Descripcion);
-            }
-            cmbIDPlan.DataSource = planes;
+            cmbIDPlan.DataSource = new PlanLogic().GetAll();
+            cmbIDPlan.DisplayMember = "descripcion";
+            cmbIDPlan.ValueMember = "id_plan";
         }
         
         #endregion

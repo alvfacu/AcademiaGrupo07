@@ -52,7 +52,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.17747F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.82253F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 59F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 149F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 153F));
             this.tableLayoutPanel1.Controls.Add(this.lblID, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblAnio, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblIDPlan, 2, 1);
@@ -71,7 +71,7 @@
             // 
             this.lblID.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblID.AutoSize = true;
-            this.lblID.Location = new System.Drawing.Point(42, 6);
+            this.lblID.Location = new System.Drawing.Point(41, 6);
             this.lblID.Name = "lblID";
             this.lblID.Size = new System.Drawing.Size(18, 13);
             this.lblID.TabIndex = 0;
@@ -81,7 +81,7 @@
             // 
             this.lblAnio.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblAnio.AutoSize = true;
-            this.lblAnio.Location = new System.Drawing.Point(7, 32);
+            this.lblAnio.Location = new System.Drawing.Point(6, 32);
             this.lblAnio.Name = "lblAnio";
             this.lblAnio.Size = new System.Drawing.Size(89, 13);
             this.lblAnio.TabIndex = 1;
@@ -91,7 +91,7 @@
             // 
             this.lblIDPlan.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblIDPlan.AutoSize = true;
-            this.lblIDPlan.Location = new System.Drawing.Point(299, 32);
+            this.lblIDPlan.Location = new System.Drawing.Point(295, 32);
             this.lblIDPlan.Name = "lblIDPlan";
             this.lblIDPlan.Size = new System.Drawing.Size(28, 13);
             this.lblIDPlan.TabIndex = 2;
@@ -100,7 +100,7 @@
             // txtID
             // 
             this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtID.Location = new System.Drawing.Point(106, 3);
+            this.txtID.Location = new System.Drawing.Point(104, 3);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
             this.txtID.Size = new System.Drawing.Size(133, 20);
@@ -109,7 +109,7 @@
             // txtAño
             // 
             this.txtAño.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtAño.Location = new System.Drawing.Point(106, 29);
+            this.txtAño.Location = new System.Drawing.Point(104, 29);
             this.txtAño.Name = "txtAño";
             this.txtAño.Size = new System.Drawing.Size(70, 20);
             this.txtAño.TabIndex = 2;
@@ -119,7 +119,7 @@
             this.cmbIDPlan.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cmbIDPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbIDPlan.FormattingEnabled = true;
-            this.cmbIDPlan.Location = new System.Drawing.Point(346, 28);
+            this.cmbIDPlan.Location = new System.Drawing.Point(342, 28);
             this.cmbIDPlan.Name = "cmbIDPlan";
             this.cmbIDPlan.Size = new System.Drawing.Size(105, 21);
             this.cmbIDPlan.TabIndex = 3;

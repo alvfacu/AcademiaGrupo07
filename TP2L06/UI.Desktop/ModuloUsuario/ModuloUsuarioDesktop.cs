@@ -68,8 +68,7 @@ namespace UI.Desktop
         public virtual void MapearDeDatos()
         {
             this.txtID.Text = this.ModuloUsrActual.ID.ToString();
-            this.txtIDUsr.Text = this.ModuloUsrActual.IdUsuario.ToString();
-            this.cmbIDMod.Text = this.ModuloUsrActual.IdModulo.ToString();
+            //no salen combobox
             this.chkAlta.Checked = this.ModuloUsrActual.PermiteAlta;
             this.chkBaja.Checked = this.ModuloUsrActual.PermiteBaja;
             this.chkConsulta.Checked = this.ModuloUsrActual.PermiteConsulta;
@@ -84,13 +83,15 @@ namespace UI.Desktop
 
         public virtual void MapearADatos()
         {
+            Business.Entities.Modulo moduloActual = this.DevolverModulo();
+            Business.Entities.Usuario usuarioActual = this.DevolverUsuario();
             switch (this.Modo)
             {
                 case (ModoForm.Alta):
                     {
                         ModuloUsrActual = new ModuloUsuario();
-                        this.ModuloUsrActual.IdUsuario = int.Parse(this.txtIDUsr.Text);
-                        this.ModuloUsrActual.IdModulo = DevolverIDModulo(this.cmbIDMod.Text);
+                        this.ModuloUsrActual.IdUsuario = usuarioActual.ID;
+                        this.ModuloUsrActual.IdModulo = moduloActual.ID;
                         this.ModuloUsrActual.PermiteAlta = this.chkAlta.Checked;
                         this.ModuloUsrActual.PermiteBaja = this.chkBaja.Checked;
                         this.ModuloUsrActual.PermiteConsulta = this.chkConsulta.Checked;
@@ -100,8 +101,8 @@ namespace UI.Desktop
                     }
                 case (ModoForm.Modificacion):
                     {
-                        this.ModuloUsrActual.IdUsuario = int.Parse(this.txtIDUsr.Text);
-                        this.ModuloUsrActual.IdModulo = DevolverIDModulo(this.cmbIDMod.Text);
+                        this.ModuloUsrActual.IdUsuario = usuarioActual.ID;
+                        this.ModuloUsrActual.IdModulo = moduloActual.ID;
                         this.ModuloUsrActual.PermiteAlta = this.chkAlta.Checked;
                         this.ModuloUsrActual.PermiteBaja = this.chkBaja.Checked;
                         this.ModuloUsrActual.PermiteConsulta = this.chkConsulta.Checked;
@@ -122,67 +123,19 @@ namespace UI.Desktop
             }
         }
 
-        private int DevolverIDModulo(string p)
+        private Usuario DevolverUsuario()
         {
-            List<Modulo> modulos = new ModuloLogic().GetAll();
-            int id = 0;
+            return new UsuarioLogic().GetOne(((Business.Entities.Usuario)this.cmbUsuarios.SelectedValue).ID); ;
+        }
 
-            foreach (Modulo mod in modulos)
-            {
-                if (String.Compare(p, mod.Descripcion, true) == 0)
-                {
-                    id = mod.ID;
-                }
-            }
-
-            return id;
+        private Modulo DevolverModulo()
+        {
+            return new ModuloLogic().GetOne(((Business.Entities.Modulo)this.cmbIDMod.SelectedValue).ID);
         }
 
         public virtual bool Validar()
         {
-            int nro;
-            Boolean estado = true;
-            if (!(this.Modo == ModoForm.Baja))
-            {
-                foreach (Control control in this.tableLayoutPanel1.Controls)
-                {
-                    if (!(control == txtID))
-                    {
-                        if (control is TextBox && control.Text == String.Empty)
-                        {
-                            estado = false;
-                        }
-                    }
-
-                }
-                if (estado == false)
-                {
-                    Notificar("Campos vacíos", "Existen campos sin completar.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (int.TryParse(this.txtIDUsr.Text, out nro))
-                {
-                    List<Usuario> listaUsuarios = new UsuarioLogic().GetAll();
-                    int id = int.Parse(this.txtIDUsr.Text);
-                    bool est = false;
-                    foreach (Usuario usr in listaUsuarios)
-                    {
-                        if (usr.ID == id)
-                        {
-                            est = true;
-                            estado = true;
-                        }
-                        else if (est != true)
-                        {
-                            estado = false;
-                        }
-                    }
-                    if (estado == false)
-                    {
-                        Notificar("ID Usuario inexistente", "El ID Usuario ingresado no corresponde a un Usuario registrado.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            return estado;
+            return true;
         }
 
         public void Notificar(string titulo, string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
@@ -215,14 +168,14 @@ namespace UI.Desktop
 
         private void ModuloUsuarioDesktop_Load(object sender, EventArgs e)
         {
-            List<Modulo> listaModulo = new ModuloLogic().GetAll();
-            List<String> mods = new List<String>();
-            foreach (Modulo mod in listaModulo)
-            {
-                mods.Add(mod.Descripcion);
-            }
-            
-            cmbIDMod.DataSource = mods;
+            cmbIDMod.DataSource = new ModuloLogic().GetAll();
+            cmbUsuarios.DataSource = new UsuarioLogic().GetAll();
+
+            cmbIDMod.DisplayMember = "descripcion";
+            cmbUsuarios.DisplayMember = "nombreusuario";
+
+            cmbIDMod.ValueMember = "id_modulo";
+            cmbUsuarios.ValueMember = "id_usuario";
 
         }
 

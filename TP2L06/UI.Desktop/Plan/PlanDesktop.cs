@@ -69,7 +69,7 @@ namespace UI.Desktop
         {
             this.txtID.Text = this.PlanActual.ID.ToString();
             this.txtDescripcion.Text = this.PlanActual.Descripcion;
-            this.cmbIDEsp.Text = this.PlanActual.IDEspecialidad.ToString();
+            //no sale combobox
         }
 
         public virtual void GuardarCambios()
@@ -80,21 +80,21 @@ namespace UI.Desktop
         
         public virtual void MapearADatos() 
         {
-            
+            Business.Entities.Especialidad especialidadActual = DevolverEspecialidad();
             switch (this.Modo)
             {
                 case (ModoForm.Alta):
                     {
                         PlanActual = new Plan();
                         this.PlanActual.Descripcion = this.txtDescripcion.Text;
-                        this.PlanActual.IDEspecialidad = DevolverIDEspecialidad(this.cmbIDEsp.Text);
+                        this.PlanActual.IDEspecialidad = especialidadActual.ID;
                         this.PlanActual.State = BusinessEntity.States.New;
                         break; 
                     }
                 case (ModoForm.Modificacion):
                     {
                         this.PlanActual.Descripcion = this.txtDescripcion.Text;
-                        this.PlanActual.IDEspecialidad = DevolverIDEspecialidad(this.cmbIDEsp.Text);
+                        this.PlanActual.IDEspecialidad = especialidadActual.ID;
                         this.PlanActual.State = BusinessEntity.States.Modified;
                         break;
                     }
@@ -109,6 +109,11 @@ namespace UI.Desktop
                         break;
                     }
             }
+        }
+
+        private Especialidad DevolverEspecialidad()
+        {
+            return new EspecialidadLogic().GetOne(((Business.Entities.Especialidad)this.cmbIDEsp.SelectedValue).ID); ;
         }
        
         public virtual bool Validar() 
@@ -145,21 +150,7 @@ namespace UI.Desktop
             this.Notificar(this.Text, mensaje, botones, icono);
         }
         
-        private int DevolverIDEspecialidad(string p)
-        {
-            List<Especialidad> listaEspecialidades = new EspecialidadLogic().GetAll();
-            int id = 0;
-
-            foreach (Especialidad esp in listaEspecialidades)
-            {
-                if (String.Compare(p, esp.Descripcion, true) == 0)
-                {
-                    id = esp.ID;
-                }
-            }
- 
-            return id;
-        }
+        
         
 
         #endregion
@@ -182,14 +173,10 @@ namespace UI.Desktop
 
         private void PlanDesktop_Load(object sender, EventArgs e)
         {
-            List<Especialidad> listaEspecialidades = new EspecialidadLogic().GetAll();
-            List<String> especialidad = new List<String>();
-            foreach (Especialidad esp in listaEspecialidades)
-            {
-                especialidad.Add(esp.Descripcion);
-            }
+            cmbIDEsp.DataSource = new EspecialidadLogic().GetAll();
 
-            cmbIDEsp.DataSource = especialidad;
+            cmbIDEsp.DisplayMember = "descripcion";
+            cmbIDEsp.ValueMember = "id_especialidad";
         }
 
         #endregion

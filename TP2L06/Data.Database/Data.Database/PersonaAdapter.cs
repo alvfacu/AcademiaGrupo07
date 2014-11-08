@@ -243,5 +243,81 @@ namespace Data.Database
 
             return personas;
         }
+
+        public List<Personas> GetAllAlumnos()
+        {
+            List<Personas> personas = new List<Personas>();
+
+            try
+            {
+                this.OpenConnection();
+
+                SqlCommand cmdPersona = new SqlCommand("SELECT id_persona, nombre+' '+apellido AS apenom FROM personas WHERE tipo_persona=2", sqlConn);
+
+                SqlDataReader drPersonas = cmdPersona.ExecuteReader();
+
+                while (drPersonas.Read())
+                {
+                    Personas per = new Personas();
+
+                    per.ID = (int)drPersonas["id_persona"];
+                    per.Nombre = (string)drPersonas["apenom"];
+
+                    personas.Add(per);
+                }
+
+                drPersonas.Close();
+            }
+            catch (Exception Ex)
+            {
+                Exception ExcepcionManejada =
+                new Exception("Error al recuperar lista de alumnos", Ex);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+
+            return personas;
+        }
+
+        public object GetAllDocentes()
+        {
+            List<Personas> personas = new List<Personas>();
+
+            try
+            {
+                this.OpenConnection();
+
+                SqlCommand cmdPersona = new SqlCommand("SELECT id_persona, nombre+' '+apellido AS apenom FROM personas WHERE tipo_persona=1", sqlConn);
+
+                SqlDataReader drPersonas = cmdPersona.ExecuteReader();
+
+                while (drPersonas.Read())
+                {
+                    Personas per = new Personas();
+
+                    per.ID = (int)drPersonas["id_persona"];
+                    per.Nombre = (string)drPersonas["apenom"];
+
+                    personas.Add(per);
+                }
+
+                drPersonas.Close();
+            }
+            catch (Exception Ex)
+            {
+                Exception ExcepcionManejada =
+                new Exception("Error al recuperar lista de alumnos", Ex);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+
+            return personas;
+        }
     }
 }

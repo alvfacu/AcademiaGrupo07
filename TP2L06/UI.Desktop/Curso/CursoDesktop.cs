@@ -71,8 +71,7 @@ namespace UI.Desktop
             this.txtAnio.Text = this.CursoActual.AnioCalendario.ToString();
             this.txtCupo.Text = this.CursoActual.Cupo.ToString();
             this.txtDescripcion.Text = this.CursoActual.Descripcion;
-            this.cmbIDCom.Text = this.CursoActual.IDComision.ToString();
-            this.cmbIDMat.Text = this.CursoActual.IDMateria.ToString();
+            // no salen los comboboxs
         }
 
         public virtual void GuardarCambios()
@@ -83,6 +82,8 @@ namespace UI.Desktop
 
         public virtual void MapearADatos()
         {
+            Business.Entities.Materia materiaActual = this.DevolverMateria();
+            Business.Entities.Comision comisionActual = this.DevolverComision(); 
 
             switch (this.Modo)
             {
@@ -92,8 +93,8 @@ namespace UI.Desktop
                         this.CursoActual.AnioCalendario = int.Parse(this.txtAnio.Text);
                         this.CursoActual.Cupo = int.Parse(this.txtCupo.Text);
                         this.CursoActual.Descripcion =  this.txtDescripcion.Text;
-                        this.CursoActual.IDComision = DevolverIDComision(this.cmbIDCom.Text);
-                        this.CursoActual.IDMateria = DevolverIDMateria(this.cmbIDMat.Text);
+                        this.CursoActual.IDComision = comisionActual.ID;
+                        this.CursoActual.IDMateria = materiaActual.ID;
                         this.CursoActual.State = BusinessEntity.States.New;
                         break;
                     }
@@ -101,9 +102,9 @@ namespace UI.Desktop
                     {
                         this.CursoActual.AnioCalendario = int.Parse(this.txtAnio.Text);
                         this.CursoActual.Cupo = int.Parse(this.txtCupo.Text);
-                        this.CursoActual.Descripcion = this.txtDescripcion.Text;
-                        this.CursoActual.IDComision = DevolverIDComision(this.cmbIDCom.Text);
-                        this.CursoActual.IDMateria = DevolverIDMateria(this.cmbIDMat.Text);
+                        this.CursoActual.Descripcion = this.txtDescripcion.Text; 
+                        this.CursoActual.IDComision = comisionActual.ID;
+                        this.CursoActual.IDMateria = materiaActual.ID;
                         this.CursoActual.State = BusinessEntity.States.Modified;
                         break;
                     }
@@ -118,6 +119,16 @@ namespace UI.Desktop
                         break;
                     }
             }
+        }
+
+        private Comision DevolverComision()
+        {
+            return new ComisionLogic().GetOne(((Business.Entities.Comision)this.cmbIDCom.SelectedValue).ID);
+        }
+
+        private Materia DevolverMateria()
+        {
+            return new MateriaLogic().GetOne(((Business.Entities.Materia)this.cmbIDMat.SelectedValue).ID);
         }
 
         private int DevolverIDComision(string p)
@@ -225,23 +236,15 @@ namespace UI.Desktop
 
         private void CursoDesktop_Load(object sender, EventArgs e)
         {
-            List<Materia> listaMaterias = new MateriaLogic().GetAll();
-            List<String> mats = new List<String>();
-            foreach (Materia mat in listaMaterias)
-            {
-                mats.Add(mat.Descripcion);
-            }
-            
-            cmbIDMat.DataSource = mats;
+            cmbIDCom.DataSource = new ComisionLogic().GetAll();
+            cmbIDMat.DataSource = new MateriaLogic().GetAll();
 
-            List<Comision> listaComisiones = new ComisionLogic().GetAll();
-            List<String> coms = new List<String>();
-            foreach (Comision com in listaComisiones)
-            {
-                coms.Add(com.Descripcion);
-            }
+            cmbIDCom.DisplayMember = "descripcion";
+            cmbIDMat.DisplayMember = "descripcion";
+
+            cmbIDCom.ValueMember = "id_comision";
+            cmbIDMat.ValueMember = "id_materia";
             
-            cmbIDCom.DataSource = coms;
         }
 
         #endregion

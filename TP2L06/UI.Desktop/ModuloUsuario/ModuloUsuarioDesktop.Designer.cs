@@ -30,11 +30,10 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblID = new System.Windows.Forms.Label();
-            this.lblIDUsr = new System.Windows.Forms.Label();
+            this.lblUsr = new System.Windows.Forms.Label();
             this.lblIDMod = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.cmbIDMod = new System.Windows.Forms.ComboBox();
-            this.txtIDUsr = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.chkAlta = new System.Windows.Forms.CheckBox();
             this.chkMod = new System.Windows.Forms.CheckBox();
@@ -43,6 +42,7 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.cmbUsuarios = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -54,13 +54,13 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.11111F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.88889F));
             this.tableLayoutPanel1.Controls.Add(this.lblID, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblIDUsr, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblUsr, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblIDMod, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtID, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.cmbIDMod, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtIDUsr, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.cmbUsuarios, 1, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 9);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
@@ -82,15 +82,15 @@
             this.lblID.TabIndex = 0;
             this.lblID.Text = "ID";
             // 
-            // lblIDUsr
+            // lblUsr
             // 
-            this.lblIDUsr.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblIDUsr.AutoSize = true;
-            this.lblIDUsr.Location = new System.Drawing.Point(10, 62);
-            this.lblIDUsr.Name = "lblIDUsr";
-            this.lblIDUsr.Size = new System.Drawing.Size(57, 13);
-            this.lblIDUsr.TabIndex = 1;
-            this.lblIDUsr.Text = "ID Usuario";
+            this.lblUsr.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblUsr.AutoSize = true;
+            this.lblUsr.Location = new System.Drawing.Point(17, 62);
+            this.lblUsr.Name = "lblUsr";
+            this.lblUsr.Size = new System.Drawing.Size(43, 13);
+            this.lblUsr.TabIndex = 1;
+            this.lblUsr.Text = "Usuario";
             // 
             // lblIDMod
             // 
@@ -118,16 +118,8 @@
             this.cmbIDMod.FormattingEnabled = true;
             this.cmbIDMod.Location = new System.Drawing.Point(81, 29);
             this.cmbIDMod.Name = "cmbIDMod";
-            this.cmbIDMod.Size = new System.Drawing.Size(145, 21);
+            this.cmbIDMod.Size = new System.Drawing.Size(192, 21);
             this.cmbIDMod.TabIndex = 4;
-            // 
-            // txtIDUsr
-            // 
-            this.txtIDUsr.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtIDUsr.Location = new System.Drawing.Point(81, 58);
-            this.txtIDUsr.Name = "txtIDUsr";
-            this.txtIDUsr.Size = new System.Drawing.Size(74, 20);
-            this.txtIDUsr.TabIndex = 5;
             // 
             // tableLayoutPanel2
             // 
@@ -226,6 +218,15 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // cmbUsuarios
+            // 
+            this.cmbUsuarios.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbUsuarios.FormattingEnabled = true;
+            this.cmbUsuarios.Location = new System.Drawing.Point(81, 57);
+            this.cmbUsuarios.Name = "cmbUsuarios";
+            this.cmbUsuarios.Size = new System.Drawing.Size(192, 21);
+            this.cmbUsuarios.TabIndex = 8;
+            // 
             // ModuloUsuarioDesktop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -251,11 +252,10 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label lblID;
-        private System.Windows.Forms.Label lblIDUsr;
+        private System.Windows.Forms.Label lblUsr;
         private System.Windows.Forms.Label lblIDMod;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.ComboBox cmbIDMod;
-        private System.Windows.Forms.TextBox txtIDUsr;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.CheckBox chkAlta;
         private System.Windows.Forms.CheckBox chkMod;
@@ -264,5 +264,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.ComboBox cmbUsuarios;
     }
 }

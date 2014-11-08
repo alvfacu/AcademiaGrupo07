@@ -69,7 +69,6 @@ namespace UI.Desktop
         public virtual void MapearDeDatos()
         {
             this.txtID.Text = this.PersonaActual.ID.ToString();
-            this.cmbPlan.Text = this.PersonaActual.IDPlan.ToString();
             this.txtNombre.Text = this.PersonaActual.Nombre;
             this.txtApellido.Text = this.PersonaActual.Apellido;
             this.txtEmail.Text = this.PersonaActual.Email;
@@ -79,7 +78,7 @@ namespace UI.Desktop
             this.txtDireccion.Text = this.PersonaActual.Direccion;
             this.txtLegajo.Text = this.PersonaActual.Legajo.ToString();
             this.txtTelefono.Text = this.PersonaActual.Telefono;
-            this.cmbTiposPersonas.Text = this.PersonaActual.TipoPersona.ToString();
+            //no salen comboboxs
         }
 
         public virtual void GuardarCambios()
@@ -90,12 +89,13 @@ namespace UI.Desktop
 
         public virtual void MapearADatos()
         {
+            Business.Entities.Plan planActual = this.DevolverPlan();
             switch (this.Modo)
             {
                 case (ModoForm.Alta):
                     {
                         PersonaActual = new Business.Entities.Personas();
-                        this.PersonaActual.IDPlan = DevolverIDPlan(this.cmbPlan.Text);
+                        this.PersonaActual.IDPlan = planActual.ID;
                         this.PersonaActual.Nombre = this.txtNombre.Text;
                         this.PersonaActual.Apellido = this.txtApellido.Text;
                         this.PersonaActual.Email = this.txtEmail.Text;
@@ -104,13 +104,13 @@ namespace UI.Desktop
                         this.PersonaActual.FechaNacimiento = fechaNac;
                         this.PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);
                         this.PersonaActual.Telefono = this.txtTelefono.Text;
-                        this.PersonaActual.TipoPersona = (Business.Entities.Personas.TiposPersonas)Enum.Parse(typeof(Business.Entities.Personas.TiposPersonas), this.cmbTiposPersonas.Text);
+                        this.PersonaActual.TipoPersona = (Business.Entities.Personas.TiposPersonas)Enum.Parse(typeof(Business.Entities.Personas.TiposPersonas), this.cmbTiposPersonas.SelectedValue.ToString());
                         this.PersonaActual.State = BusinessEntity.States.New;
                         break;
                     }
                 case (ModoForm.Modificacion):
                     {
-                        this.PersonaActual.IDPlan = DevolverIDPlan(this.cmbPlan.Text);
+                        this.PersonaActual.IDPlan = planActual.ID;
                         this.PersonaActual.Nombre = this.txtNombre.Text;
                         this.PersonaActual.Apellido = this.txtApellido.Text;
                         this.PersonaActual.Email = this.txtEmail.Text;
@@ -119,7 +119,7 @@ namespace UI.Desktop
                         this.PersonaActual.FechaNacimiento = fechaNac;
                         this.PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);
                         this.PersonaActual.Telefono = this.txtTelefono.Text;
-                        this.PersonaActual.TipoPersona = (Business.Entities.Personas.TiposPersonas)Enum.Parse(typeof(Business.Entities.Personas.TiposPersonas), this.cmbTiposPersonas.Text);
+                        this.PersonaActual.TipoPersona = (Business.Entities.Personas.TiposPersonas)Enum.Parse(typeof(Business.Entities.Personas.TiposPersonas), this.cmbTiposPersonas.SelectedValue.ToString());
                         this.PersonaActual.State = BusinessEntity.States.Modified;
                         break;
                     }
@@ -136,20 +136,9 @@ namespace UI.Desktop
             }
         }
 
-        private int DevolverIDPlan(string p)
+        private Plan DevolverPlan()
         {
-            List<Plan> planes = new PlanLogic().GetAll();
-            int id = 0;
-
-            foreach (Plan pl in planes)
-            {
-                if (String.Compare(p, pl.Descripcion, true) == 0)
-                {
-                    id = pl.ID;
-                }
-            }
-
-            return id;
+            return new PlanLogic().GetOne(((Business.Entities.Plan)this.cmbPlan.SelectedValue).ID); ;
         }
 
         public virtual bool Validar()
@@ -240,18 +229,12 @@ namespace UI.Desktop
 
         private void PersonaDesktop_Load(object sender, EventArgs e)
         {
-            List<Plan> listaPlanes = new PlanLogic().GetAll();
-            List<String> planes = new List<String>();
-            foreach (Plan pl in listaPlanes)
-            {
-                planes.Add(pl.Descripcion);
-            }
-            
-            cmbPlan.DataSource = planes;
-
             List<String> listaTipos = Business.Entities.Personas.DevolverTiposPersonas();
-            
             cmbTiposPersonas.DataSource = listaTipos;
+
+            cmbPlan.DataSource = new PlanLogic().GetAll();
+            cmbPlan.DisplayMember = "descripcion";
+            cmbPlan.ValueMember = "id_plan";
         }
 
         #endregion

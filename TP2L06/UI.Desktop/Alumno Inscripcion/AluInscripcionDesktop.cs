@@ -68,8 +68,7 @@ namespace UI.Desktop
         public virtual void MapearDeDatos() 
         {
             this.txtID.Text = this.AluInscripcionActual.ID.ToString();
-            this.txtIDAlu.Text = this.AluInscripcionActual.IDAlumno.ToString();
-            this.cmbIDCurso.Text = this.AluInscripcionActual.IDCurso.ToString();
+            //mapeo a los combobox no salen
             this.txtCondicion.Text = this.AluInscripcionActual.Condicion;
             this.txtNota.Text = this.AluInscripcionActual.Nota.ToString();
         }
@@ -81,14 +80,16 @@ namespace UI.Desktop
         }
         
         public virtual void MapearADatos() 
-        {            
+        {
+            Business.Entities.Curso cursoActual = this.DevolverCurso();
+            Business.Entities.Personas personaActual = this.DevolverPersona();            
             switch (this.Modo)
             {
                 case (ModoForm.Alta):
                     {
                         AluInscripcionActual = new AlumnoInscripcion();
-                        this.AluInscripcionActual.IDAlumno = int.Parse(this.txtIDAlu.Text);
-                        this.AluInscripcionActual.IDCurso = DevolverIDCurso(this.cmbIDCurso.Text);
+                        this.AluInscripcionActual.IDAlumno = personaActual.ID;
+                        this.AluInscripcionActual.IDCurso = cursoActual.ID;
                         this.AluInscripcionActual.Condicion = this.txtCondicion.Text;
                         this.AluInscripcionActual.Nota = int.Parse(this.txtNota.Text);
                         this.AluInscripcionActual.State = BusinessEntity.States.New;
@@ -96,8 +97,8 @@ namespace UI.Desktop
                     }
                 case (ModoForm.Modificacion):
                     {
-                        this.AluInscripcionActual.IDAlumno = int.Parse(this.txtIDAlu.Text);
-                        this.AluInscripcionActual.IDCurso = DevolverIDCurso(this.cmbIDCurso.Text);
+                        this.AluInscripcionActual.IDAlumno = personaActual.ID;
+                        this.AluInscripcionActual.IDCurso = cursoActual.ID;
                         this.AluInscripcionActual.Condicion = this.txtCondicion.Text;
                         this.AluInscripcionActual.Nota = int.Parse(this.txtNota.Text);
                         this.AluInscripcionActual.State = BusinessEntity.States.Modified;
@@ -114,6 +115,16 @@ namespace UI.Desktop
                         break;
                     }
             }
+        }
+
+        private Business.Entities.Personas DevolverPersona()
+        {
+            return new PersonaLogic().GetOne(((Business.Entities.Personas)this.cmbAlumnos.SelectedValue).ID);
+        }
+
+        private Curso DevolverCurso()
+        {
+            return new CursoLogic().GetOne(((Business.Entities.Curso)this.cmbIDCurso.SelectedValue).ID);
         }
 
         private int DevolverIDCurso(string p)
@@ -158,15 +169,8 @@ namespace UI.Desktop
                     estado = false;
                     Notificar("Tipo incorrecto", "La nota debe ser un número entero.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else if (!((0 <= int.Parse(this.txtNota.Text)) && (int.Parse(this.txtNota.Text)<=10)))
-                {
-                    estado = false;
-                    Notificar("Número de nota incorrecta", "La nota debe ser un número entero positivo (entre 0 y 10).", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (!(int.TryParse(this.txtIDAlu.Text, out nro)))
-                {
-                    estado = false;
-                    Notificar("ID Alumno incorrecto", "Recuerde que el ID del Alumno debe ser un número entero positivo.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (!((0 <= int.Parse(this.txtNota.Text)) && (int.Parse(this.txtNota.Text)<=10)))                {                    estado = false;
+                    Notificar("Número de nota incorrecta", "La nota debe ser un numero entero positivo)(entre 0 y 10).", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             return estado;
@@ -202,14 +206,12 @@ namespace UI.Desktop
 
         private void AluInscripcionDesktop_Load(object sender, EventArgs e)
         {
-            List<Curso> listaCurso = new CursoLogic().GetAll();
-            List<String> cursos = new List<String>();
-            foreach (Curso cur in listaCurso)
-            {
-                cursos.Add(cur.Descripcion);
-            }
-
-            cmbIDCurso.DataSource = cursos;
+            cmbAlumnos.DataSource = new PersonaLogic().DevolverAlumnos();
+            cmbIDCurso.DataSource = new CursoLogic().GetAll();
+            cmbIDCurso.DisplayMember = "descripcion";
+            cmbAlumnos.DisplayMember = "nombre";
+            cmbAlumnos.ValueMember = "id_persona";                  
+            cmbIDCurso.ValueMember = "id_curso";
         }
 
         #endregion

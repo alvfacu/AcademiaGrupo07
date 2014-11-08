@@ -36,13 +36,13 @@
             this.lblIDMat = new System.Windows.Forms.Label();
             this.lblCupo = new System.Windows.Forms.Label();
             this.btnAceptar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.txtCupo = new System.Windows.Forms.TextBox();
             this.txtAnio = new System.Windows.Forms.TextBox();
             this.cmbIDCom = new System.Windows.Forms.ComboBox();
             this.cmbIDMat = new System.Windows.Forms.ComboBox();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +52,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.08711F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 74.9129F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 184F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 185F));
             this.tableLayoutPanel1.Controls.Add(this.lblID, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblDescrip, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblAnio, 2, 1);
@@ -81,7 +81,7 @@
             // 
             this.lblID.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblID.AutoSize = true;
-            this.lblID.Location = new System.Drawing.Point(30, 9);
+            this.lblID.Location = new System.Drawing.Point(29, 9);
             this.lblID.Name = "lblID";
             this.lblID.Size = new System.Drawing.Size(18, 13);
             this.lblID.TabIndex = 0;
@@ -101,7 +101,7 @@
             // 
             this.lblAnio.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblAnio.AutoSize = true;
-            this.lblAnio.Location = new System.Drawing.Point(338, 42);
+            this.lblAnio.Location = new System.Drawing.Point(337, 42);
             this.lblAnio.Name = "lblAnio";
             this.lblAnio.Size = new System.Drawing.Size(79, 13);
             this.lblAnio.TabIndex = 2;
@@ -121,7 +121,7 @@
             // 
             this.lblIDMat.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblIDMat.AutoSize = true;
-            this.lblIDMat.Location = new System.Drawing.Point(356, 73);
+            this.lblIDMat.Location = new System.Drawing.Point(355, 73);
             this.lblIDMat.Name = "lblIDMat";
             this.lblIDMat.Size = new System.Drawing.Size(42, 13);
             this.lblIDMat.TabIndex = 4;
@@ -131,7 +131,7 @@
             // 
             this.lblCupo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblCupo.AutoSize = true;
-            this.lblCupo.Location = new System.Drawing.Point(23, 107);
+            this.lblCupo.Location = new System.Drawing.Point(22, 107);
             this.lblCupo.Name = "lblCupo";
             this.lblCupo.Size = new System.Drawing.Size(32, 13);
             this.lblCupo.TabIndex = 5;
@@ -140,7 +140,7 @@
             // btnAceptar
             // 
             this.btnAceptar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnAceptar.Location = new System.Drawing.Point(335, 100);
+            this.btnAceptar.Location = new System.Drawing.Point(334, 100);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(85, 27);
             this.btnAceptar.TabIndex = 6;
@@ -148,21 +148,10 @@
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnCancelar.Location = new System.Drawing.Point(448, 100);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(88, 27);
-            this.btnCancelar.TabIndex = 7;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
             // txtID
             // 
             this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtID.Location = new System.Drawing.Point(81, 6);
+            this.txtID.Location = new System.Drawing.Point(80, 6);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
             this.txtID.Size = new System.Drawing.Size(149, 20);
@@ -171,7 +160,7 @@
             // txtDescripcion
             // 
             this.txtDescripcion.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtDescripcion.Location = new System.Drawing.Point(84, 39);
+            this.txtDescripcion.Location = new System.Drawing.Point(83, 39);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(220, 20);
             this.txtDescripcion.TabIndex = 9;
@@ -179,7 +168,7 @@
             // txtCupo
             // 
             this.txtCupo.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtCupo.Location = new System.Drawing.Point(81, 104);
+            this.txtCupo.Location = new System.Drawing.Point(80, 104);
             this.txtCupo.Name = "txtCupo";
             this.txtCupo.Size = new System.Drawing.Size(52, 20);
             this.txtCupo.TabIndex = 10;
@@ -187,7 +176,7 @@
             // txtAnio
             // 
             this.txtAnio.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtAnio.Location = new System.Drawing.Point(448, 39);
+            this.txtAnio.Location = new System.Drawing.Point(447, 39);
             this.txtAnio.Name = "txtAnio";
             this.txtAnio.Size = new System.Drawing.Size(52, 20);
             this.txtAnio.TabIndex = 11;
@@ -195,8 +184,9 @@
             // cmbIDCom
             // 
             this.cmbIDCom.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cmbIDCom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbIDCom.FormattingEnabled = true;
-            this.cmbIDCom.Location = new System.Drawing.Point(81, 69);
+            this.cmbIDCom.Location = new System.Drawing.Point(80, 69);
             this.cmbIDCom.Name = "cmbIDCom";
             this.cmbIDCom.Size = new System.Drawing.Size(112, 21);
             this.cmbIDCom.TabIndex = 12;
@@ -204,11 +194,23 @@
             // cmbIDMat
             // 
             this.cmbIDMat.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cmbIDMat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbIDMat.FormattingEnabled = true;
-            this.cmbIDMat.Location = new System.Drawing.Point(448, 69);
+            this.cmbIDMat.Location = new System.Drawing.Point(447, 69);
             this.cmbIDMat.Name = "cmbIDMat";
             this.cmbIDMat.Size = new System.Drawing.Size(179, 21);
             this.cmbIDMat.TabIndex = 13;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnCancelar.Location = new System.Drawing.Point(447, 100);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(88, 27);
+            this.btnCancelar.TabIndex = 7;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // CursoDesktop
             // 

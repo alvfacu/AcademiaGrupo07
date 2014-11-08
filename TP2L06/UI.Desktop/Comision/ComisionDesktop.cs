@@ -81,14 +81,14 @@ namespace UI.Desktop
 
         public virtual void MapearADatos()
         {
-
+            Business.Entities.Plan planActual = this.DevolverPlan();
             switch (this.Modo)
             {
                 case (ModoForm.Alta):
                     {
                         ComisionActual = new Comision();
                         this.ComisionActual.Descripcion = this.txtDescripcion.Text;
-                        this.ComisionActual.IDPlan = DevolverIDPlan(this.cmbIDPlan.Text);
+                        this.ComisionActual.IDPlan = planActual.ID;
                         this.ComisionActual.AnioEspecialidad = int.Parse(this.txtAño.Text);
                         this.ComisionActual.State = BusinessEntity.States.New;
                         break;
@@ -96,7 +96,7 @@ namespace UI.Desktop
                 case (ModoForm.Modificacion):
                     {
                         this.ComisionActual.Descripcion = this.txtDescripcion.Text;
-                        this.ComisionActual.IDPlan = DevolverIDPlan(this.cmbIDPlan.Text);
+                        this.ComisionActual.IDPlan = planActual.ID;
                         this.ComisionActual.AnioEspecialidad = int.Parse(this.txtAño.Text);
                         this.ComisionActual.State = BusinessEntity.States.Modified;
                         break;
@@ -113,21 +113,10 @@ namespace UI.Desktop
                     }
             }
         }
-
-        private int DevolverIDPlan(String p)
+        
+        private Plan DevolverPlan()
         {
-            List<Plan> listaPlanes = new PlanLogic().GetAll();
-            int id = 0;
-
-            foreach (Plan pl in listaPlanes)
-            {
-                if (String.Compare(pl.Descripcion, p, true) == 0)
-                {
-                    id = pl.ID;
-                }
-            }
-
-            return id;
+            return new PlanLogic().GetOne(((Business.Entities.Plan)this.cmbIDPlan.SelectedValue).ID);
         }
 
         public virtual bool Validar()
@@ -189,15 +178,10 @@ namespace UI.Desktop
 
         private void ComisionDesktop_Load(object sender, EventArgs e)
         {
-            List<Plan> listaPlanes = new PlanLogic().GetAll();
-            List<String> plan = new List<String>();
+            cmbIDPlan.DataSource = new PlanLogic().GetAll();
 
-            foreach (Plan pl in listaPlanes)
-            {
-                plan.Add(pl.Descripcion);
-            }
-
-            this.cmbIDPlan.DataSource = plan;
+            cmbIDPlan.DisplayMember = "descripcion";
+            cmbIDPlan.ValueMember = "id_especialidad";
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)

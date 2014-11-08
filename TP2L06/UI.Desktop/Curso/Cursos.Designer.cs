@@ -32,18 +32,18 @@
             this.tcCursos = new System.Windows.Forms.ToolStripContainer();
             this.tlCursos = new System.Windows.Forms.TableLayoutPanel();
             this.dgvCursos = new System.Windows.Forms.DataGridView();
-            this.btnActualizar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.tbsNuevo = new System.Windows.Forms.ToolStripButton();
-            this.tbsEditar = new System.Windows.Forms.ToolStripButton();
-            this.tbsEliminar = new System.Windows.Forms.ToolStripButton();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AñoCalendario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IDComision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IDMateria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnActualizar = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tbsNuevo = new System.Windows.Forms.ToolStripButton();
+            this.tbsEditar = new System.Windows.Forms.ToolStripButton();
+            this.tbsEliminar = new System.Windows.Forms.ToolStripButton();
             this.tcCursos.ContentPanel.SuspendLayout();
             this.tcCursos.TopToolStripPanel.SuspendLayout();
             this.tcCursos.SuspendLayout();
@@ -58,11 +58,11 @@
             // tcCursos.ContentPanel
             // 
             this.tcCursos.ContentPanel.Controls.Add(this.tlCursos);
-            this.tcCursos.ContentPanel.Size = new System.Drawing.Size(880, 241);
+            this.tcCursos.ContentPanel.Size = new System.Drawing.Size(795, 286);
             this.tcCursos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcCursos.Location = new System.Drawing.Point(0, 0);
             this.tcCursos.Name = "tcCursos";
-            this.tcCursos.Size = new System.Drawing.Size(880, 266);
+            this.tcCursos.Size = new System.Drawing.Size(795, 311);
             this.tcCursos.TabIndex = 0;
             this.tcCursos.Text = "toolStripContainer1";
             // 
@@ -84,7 +84,7 @@
             this.tlCursos.RowCount = 2;
             this.tlCursos.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlCursos.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlCursos.Size = new System.Drawing.Size(880, 241);
+            this.tlCursos.Size = new System.Drawing.Size(795, 286);
             this.tlCursos.TabIndex = 0;
             // 
             // dgvCursos
@@ -108,13 +108,61 @@
             this.dgvCursos.Name = "dgvCursos";
             this.dgvCursos.ReadOnly = true;
             this.dgvCursos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCursos.Size = new System.Drawing.Size(874, 197);
+            this.dgvCursos.Size = new System.Drawing.Size(789, 242);
             this.dgvCursos.TabIndex = 0;
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.FillWeight = 20F;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.DataPropertyName = "Descripcion";
+            this.Descripcion.FillWeight = 200F;
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            // 
+            // AñoCalendario
+            // 
+            this.AñoCalendario.DataPropertyName = "AnioCalendario";
+            this.AñoCalendario.FillWeight = 70F;
+            this.AñoCalendario.HeaderText = "Año Calendario";
+            this.AñoCalendario.Name = "AñoCalendario";
+            this.AñoCalendario.ReadOnly = true;
+            // 
+            // Cupo
+            // 
+            this.Cupo.DataPropertyName = "Cupo";
+            this.Cupo.FillWeight = 58F;
+            this.Cupo.HeaderText = "Cupo";
+            this.Cupo.Name = "Cupo";
+            this.Cupo.ReadOnly = true;
+            // 
+            // IDComision
+            // 
+            this.IDComision.DataPropertyName = "IDComision";
+            this.IDComision.FillWeight = 80F;
+            this.IDComision.HeaderText = "ID Comisión";
+            this.IDComision.Name = "IDComision";
+            this.IDComision.ReadOnly = true;
+            // 
+            // IDMateria
+            // 
+            this.IDMateria.DataPropertyName = "IDMateria";
+            this.IDMateria.FillWeight = 80F;
+            this.IDMateria.HeaderText = "ID Materia";
+            this.IDMateria.Name = "IDMateria";
+            this.IDMateria.ReadOnly = true;
             // 
             // btnActualizar
             // 
             this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnActualizar.Location = new System.Drawing.Point(715, 206);
+            this.btnActualizar.Location = new System.Drawing.Point(630, 251);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(78, 32);
             this.btnActualizar.TabIndex = 1;
@@ -124,7 +172,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(799, 206);
+            this.btnSalir.Location = new System.Drawing.Point(714, 251);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(78, 32);
             this.btnSalir.TabIndex = 2;
@@ -177,59 +225,11 @@
             this.tbsEliminar.ToolTipText = "Eliminar";
             this.tbsEliminar.Click += new System.EventHandler(this.tbsEliminar_Click);
             // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.FillWeight = 20F;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.FillWeight = 200F;
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
-            // 
-            // AñoCalendario
-            // 
-            this.AñoCalendario.DataPropertyName = "AnioCalendario";
-            this.AñoCalendario.FillWeight = 70F;
-            this.AñoCalendario.HeaderText = "Año Calendario";
-            this.AñoCalendario.Name = "AñoCalendario";
-            this.AñoCalendario.ReadOnly = true;
-            // 
-            // Cupo
-            // 
-            this.Cupo.DataPropertyName = "Cupo";
-            this.Cupo.FillWeight = 58F;
-            this.Cupo.HeaderText = "Cupo";
-            this.Cupo.Name = "Cupo";
-            this.Cupo.ReadOnly = true;
-            // 
-            // IDComision
-            // 
-            this.IDComision.DataPropertyName = "IDComision";
-            this.IDComision.FillWeight = 80F;
-            this.IDComision.HeaderText = "ID Comisión";
-            this.IDComision.Name = "IDComision";
-            this.IDComision.ReadOnly = true;
-            // 
-            // IDMateria
-            // 
-            this.IDMateria.DataPropertyName = "IDMateria";
-            this.IDMateria.FillWeight = 80F;
-            this.IDMateria.HeaderText = "ID Materia";
-            this.IDMateria.Name = "IDMateria";
-            this.IDMateria.ReadOnly = true;
-            // 
             // Cursos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(880, 266);
+            this.ClientSize = new System.Drawing.Size(795, 311);
             this.Controls.Add(this.tcCursos);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Cursos";

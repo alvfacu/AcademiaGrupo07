@@ -68,7 +68,7 @@ namespace UI.Desktop
         public virtual void MapearDeDatos() 
         {
             this.txtID.Text = this.DocCurActual.ID.ToString();
-            this.txtIDDocente.Text = this.DocCurActual.IDDocente.ToString();
+            //no sale combobox
             this.cmbCargo.Text = this.DocCurActual.Cargo.ToString();
             this.cmbCurso.Text = DevolverDescripcion(this.DocCurActual.IDCurso);
         }
@@ -81,21 +81,23 @@ namespace UI.Desktop
         
         public virtual void MapearADatos() 
         {
-            
+            Business.Entities.Curso cursoActual = this.DevolverCurso();
+            Business.Entities.Personas docenteActual = this.DevolverPersona();
             switch (this.Modo)
             {
                 case (ModoForm.Alta):
                     {
                         DocCurActual = new DocenteCurso();
-                        this.DocCurActual.IDDocente = int.Parse(this.txtIDDocente.Text);
+                        this.DocCurActual.IDCurso = cursoActual.ID;
+                        this.DocCurActual.IDDocente = docenteActual.ID;
                         this.DocCurActual.Cargo = (DocenteCurso.TiposCargos)Enum.Parse(typeof(DocenteCurso.TiposCargos),this.cmbCargo.Text);
-                        this.DocCurActual.IDCurso = DevolverIDCurso(this.cmbCurso.Text);
                         this.DocCurActual.State = BusinessEntity.States.New;
                         break; 
                     }
                 case (ModoForm.Modificacion):
                     {
-                        this.DocCurActual.IDDocente = int.Parse(this.txtIDDocente.Text);
+                        this.DocCurActual.IDCurso = cursoActual.ID;
+                        this.DocCurActual.IDDocente = docenteActual.ID;
                         this.DocCurActual.Cargo = (DocenteCurso.TiposCargos)Enum.Parse(typeof(DocenteCurso.TiposCargos), this.cmbCargo.Text);
                         this.DocCurActual.IDCurso = DevolverIDCurso(cmbCurso.Text);
                         this.DocCurActual.State = BusinessEntity.States.Modified;
@@ -112,6 +114,16 @@ namespace UI.Desktop
                         break;
                     }
             }
+        }
+
+        private Business.Entities.Personas DevolverPersona()
+        {
+            return new PersonaLogic().GetOne(((Business.Entities.Personas)this.cmbDocente.SelectedValue).ID);
+        }
+
+        private Curso DevolverCurso()
+        {
+            return new CursoLogic().GetOne(((Business.Entities.Curso)this.cmbCurso.SelectedValue).ID);
         }
 
         private int DevolverIDCurso(string p)
@@ -147,33 +159,8 @@ namespace UI.Desktop
         }
        
         public virtual bool Validar() 
-        { 
-            int nro;
-            Boolean estado = true;
-            if (!(this.Modo == ModoForm.Baja))
-            {
-                foreach (Control control in this.tableLayoutPanel1.Controls)
-                {
-                    if (!(control == txtID))
-                    {
-                        if (control is TextBox && control.Text == String.Empty)
-                        {
-                            estado = false;
-                        }
-                    }
-                    
-                }
-                if (estado == false)
-                {
-                    Notificar("Campos vacíos", "Existen campos sin completar.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (!(int.TryParse(this.txtIDDocente.Text, out nro)))
-                {
-                    estado = false;
-                    Notificar("Tipo de dato ingresado incorrecto", "El ID del Docente contiene solo números.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            return estado;
+        {
+            return true;
         }
 
         public void Notificar(string titulo, string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
@@ -206,17 +193,19 @@ namespace UI.Desktop
 
         private void DocenteCursoDesktop_Load(object sender, EventArgs e)
         {
-            List<Curso> listaCursos = new CursoLogic().GetAll();
-            List<String> cursos = new List<String>();
-            foreach (Curso cur in listaCursos)
-            {
-                cursos.Add(cur.Descripcion);
-            }
-
-            cmbCurso.DataSource = cursos;
-
             List<String> listaCargos = DocenteCurso.DevolverTiposCargos();
             cmbCargo.DataSource = listaCargos;
+            cmbCurso.DataSource = new CursoLogic().GetAll();
+            cmbDocente.DataSource = new PersonaLogic().DevolverDocentes();
+
+            cmbCurso.DisplayMember = "descripcion";
+            cmbDocente.DisplayMember = "nombre";
+
+            cmbCurso.ValueMember = "id_curso";
+            cmbDocente.ValueMember = "id_persona";
+
+            
+            
         }
 
         #endregion
