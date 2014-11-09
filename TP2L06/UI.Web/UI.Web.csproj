@@ -59,8 +59,14 @@
     <Content Include="Comisiones.aspx" />
     <Content Include="Cursos.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="DocentesCursos.aspx" />
     <Content Include="Especialidades.aspx" />
+    <Content Include="Images\facultad-de-derecho_664535.jpg" />
+    <Content Include="Images\TunedIn_BooksfromtheBanner_large.jpg" />
+    <Content Include="Inscripciones.aspx" />
+    <Content Include="Materias.aspx" />
     <Content Include="Modulos.aspx" />
+    <Content Include="ModulosUsuarios.aspx" />
     <Content Include="Personas.aspx" />
     <Content Include="Planes.aspx" />
     <Content Include="Styles\Site.css" />
@@ -141,6 +147,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DocentesCursos.aspx.cs">
+      <DependentUpon>DocentesCursos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocentesCursos.aspx.designer.cs">
+      <DependentUpon>DocentesCursos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Especialidades.aspx.cs">
       <DependentUpon>Especialidades.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -151,12 +164,33 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Inscripciones.aspx.cs">
+      <DependentUpon>Inscripciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inscripciones.aspx.designer.cs">
+      <DependentUpon>Inscripciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Materias.aspx.cs">
+      <DependentUpon>Materias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Materias.aspx.designer.cs">
+      <DependentUpon>Materias.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Modulos.aspx.cs">
       <DependentUpon>Modulos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Modulos.aspx.designer.cs">
       <DependentUpon>Modulos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModulosUsuarios.aspx.cs">
+      <DependentUpon>ModulosUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModulosUsuarios.aspx.designer.cs">
+      <DependentUpon>ModulosUsuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Personas.aspx.cs">
       <DependentUpon>Personas.aspx</DependentUpon>
@@ -194,9 +228,6 @@
   <ItemGroup>
     <Content Include="Account\Web.config" />
     <Content Include="Site.Master" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\TP2L01\Business.Entities\Business.Entities.csproj">

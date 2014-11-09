@@ -69,8 +69,6 @@ namespace UI.Desktop
         {
             this.txtID.Text = this.DocCurActual.ID.ToString();
             //no sale combobox
-            this.cmbCargo.Text = this.DocCurActual.Cargo.ToString();
-            this.cmbCurso.Text = DevolverDescripcion(this.DocCurActual.IDCurso);
         }
 
         public virtual void GuardarCambios()
@@ -99,7 +97,6 @@ namespace UI.Desktop
                         this.DocCurActual.IDCurso = cursoActual.ID;
                         this.DocCurActual.IDDocente = docenteActual.ID;
                         this.DocCurActual.Cargo = (DocenteCurso.TiposCargos)Enum.Parse(typeof(DocenteCurso.TiposCargos), this.cmbCargo.Text);
-                        this.DocCurActual.IDCurso = DevolverIDCurso(cmbCurso.Text);
                         this.DocCurActual.State = BusinessEntity.States.Modified;
                         break;
                     }
@@ -125,23 +122,7 @@ namespace UI.Desktop
         {
             return new CursoLogic().GetOne(((Business.Entities.Curso)this.cmbCurso.SelectedValue).ID);
         }
-
-        private int DevolverIDCurso(string p)
-        {
-            List<Curso> listaCursos = new CursoLogic().GetAll();
-            int id = 0;
-
-            foreach (Curso cur in listaCursos)
-            {
-                if (String.Compare(p, cur.Descripcion, true) == 0)
-                {
-                    id = cur.ID;
-                }
-            }
-
-            return id;
-        }
-        
+               
         private string DevolverDescripcion(int p)
         {
             List<Curso> cursos = new CursoLogic().GetAll();
@@ -193,7 +174,7 @@ namespace UI.Desktop
 
         private void DocenteCursoDesktop_Load(object sender, EventArgs e)
         {
-            List<String> listaCargos = DocenteCurso.DevolverTiposCargos();
+            List<String> listaCargos = new DocenteLogic().DevolverTiposCargos();
             cmbCargo.DataSource = listaCargos;
             cmbCurso.DataSource = new CursoLogic().GetAll();
             cmbDocente.DataSource = new PersonaLogic().DevolverDocentes();
@@ -203,9 +184,6 @@ namespace UI.Desktop
 
             cmbCurso.ValueMember = "id_curso";
             cmbDocente.ValueMember = "id_persona";
-
-            
-            
         }
 
         #endregion

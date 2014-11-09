@@ -6,11 +6,48 @@
     </head>
     <body>
         <form id="bodyForm" runat="server">
-            <asp:Menu runat="server" ID="menu" DataSourceID="SiteMapDataSource"></asp:Menu>
-            <asp:SiteMapDataSource ID="SiteMapDataSource" runat="server" />
-            <div>
-                <asp:ContentPlaceHolder ID="bodyContentPlaceHolder" runat="server"></asp:ContentPlaceHolder>
-            </div>
+        <div>
+        <asp:LinkButton ID="linkHome" runat=server onclick="linkHome_Click" 
+                ToolTip="Bienvenido a la Academia">
+            <asp:Image runat=server ID="imagen" ImageUrl="~/Images/TunedIn_BooksfromtheBanner_large.jpg" /> 
+        </asp:LinkButton>
+        </div>
+        <div>
+            <asp:Menu runat="server" ID="menu" Orientation="Horizontal"
+                BackColor="#FFFBD6" DynamicHorizontalOffset="2" 
+                Font-Names="Verdana" Font-Size="0.8em" ForeColor="#990000" 
+                StaticSubMenuIndent="10px" >
+                <DynamicHoverStyle BackColor="#990000" ForeColor="White" />
+                <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                <DynamicMenuStyle BackColor="#FFFBD6" />
+                <DynamicSelectedStyle BackColor="#FFCC66" />
+                <StaticHoverStyle BackColor="#990000" ForeColor="White" />
+                <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                <StaticSelectedStyle BackColor="#FFCC66" />
+                 <Items>
+                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home" ToolTip="Home"/>
+                        <asp:MenuItem NavigateUrl="~/Usuarios.aspx" Text="Usuarios" ToolTip="Usuarios"/>
+                        <asp:MenuItem NavigateUrl="~/Comisiones.aspx" Text="Comisiones" ToolTip="Comisiones"/>
+                        <asp:MenuItem NavigateUrl="~/Planes.aspx" Text="Planes" ToolTip="Planes"/>
+                        <asp:MenuItem NavigateUrl="~/Especialidades.aspx" Text="Especialidades" ToolTip="Especialidades"/>
+                        <asp:MenuItem NavigateUrl="~/Modulos.aspx" Text="Modulos" ToolTip="Modulos"/>
+                        <asp:MenuItem NavigateUrl="~/Cursos.aspx" Text="Cursos" ToolTip="Cursos"/>
+                        <asp:MenuItem NavigateUrl="~/Inscripciones.aspx" Text="Inscripciones" ToolTip="Inscripciones"/>
+                        <asp:MenuItem NavigateUrl="~/DocentesCursos.aspx" Text="Docentes - Cursos" ToolTip="Docentes - Cursos"/>
+                        <asp:MenuItem NavigateUrl="~/Materias.aspx" Text="Materias" ToolTip="Materias" />
+                        <asp:MenuItem NavigateUrl="~/ModulosUsuarios.aspx" Text="Modulos Usuario" ToolTip="Modulos Usuario" />
+                        <asp:MenuItem NavigateUrl="~/Personas.aspx" Text="Personas" ToolTip="Personas" />
+                 </Items>
+            </asp:Menu>
+        </div>
+        <div>
+            <asp:ContentPlaceHolder ID="bodyContentPlaceHolder" runat="server"></asp:ContentPlaceHolder>
+        </div>
+        <div>
+            <asp:Label ID="autoresLabel" runat=server BackColor="#FFFBD6" DynamicHorizontalOffset="2" 
+                Font-Names="Verdana" Font-Size="0.8em" ForeColor="#990000" 
+                StaticSubMenuIndent="10px" Text="Developed by Alvarez Facundo & Gentiletti Matias. Copyright  © 2014 – All Rights Reserved."></asp:Label>
+        </div>
         </form>
     </body>
 </html>

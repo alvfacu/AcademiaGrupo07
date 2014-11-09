@@ -9,11 +9,11 @@ using Business.Entities;
 
 namespace UI.Web
 {
-    public partial class Comisiones : System.Web.UI.Page
+    public partial class ModulosUsuarios : System.Web.UI.Page
     {
         #region Variables
 
-        ComisionLogic _logic;
+        ModuloUsuarioLogic _logic;
 
         public enum FormModes
         {
@@ -26,13 +26,13 @@ namespace UI.Web
 
         #region Propiedades
 
-        private ComisionLogic Logic
+        private ModuloUsuarioLogic Logic
         {
             get
             {
                 if (_logic == null)
                 {
-                    _logic = new ComisionLogic();
+                    _logic = new ModuloUsuarioLogic();
                 }
                 return _logic;
             }
@@ -44,7 +44,7 @@ namespace UI.Web
             set { this.ViewState["FormMode"] = value; }
         }
 
-        private Comision Entity
+        private ModuloUsuario Entity
         {
             get;
             set;
@@ -90,16 +90,22 @@ namespace UI.Web
         private void LoadForm(int id)
         {
             this.Entity = this.Logic.GetOne(id);
-            this.anioTextBox.Text = this.Entity.AnioEspecialidad.ToString();
-            this.descripcionTextBox.Text = this.Entity.Descripcion;
-            this.planesList.SelectedValue = this.Entity.IDPlan.ToString();
+            this.modulosList.SelectedValue = this.Entity.IdModulo.ToString();
+            this.usuariosList.SelectedValue = this.Entity.IdUsuario.ToString();
+            this.altaCheck.Checked = this.Entity.PermiteAlta;
+            this.bajaCheck.Checked = this.Entity.PermiteBaja;
+            this.modificacionCheck.Checked = this.Entity.PermiteModificacion;
+            this.consultaCheck.Checked = this.Entity.PermiteConsulta;
         }
 
         private void EnableForm(bool enable)
         {
-            this.anioTextBox.Enabled = enable;
-            this.descripcionTextBox.Enabled = enable;
-            this.planesList.Enabled = enable;
+            this.modulosList.Enabled = enable;
+            this.usuariosList.Enabled = enable;
+            this.altaCheck.Enabled = enable;
+            this.bajaCheck.Enabled = enable;
+            this.modificacionCheck.Enabled = enable;
+            this.consultaCheck.Enabled = enable;
         }
 
         private void DeleteEntity(int id)
@@ -107,39 +113,46 @@ namespace UI.Web
             this.Logic.Delete(id);
         }
 
-        private void CargarPlanes()
+        private void CargarListas()
         {
-            this.planesList.DataSource = new PlanLogic().GetAll();
+            this.modulosList.DataSource = new ModuloLogic().GetAll();
+            this.usuariosList.DataSource = new UsuarioLogic().GetAll();
 
-            this.planesList.DataTextField = "descripcion";
-            this.planesList.DataValueField = "id";
+            this.modulosList.DataTextField = "descripcion";
+            this.usuariosList.DataTextField = "nombreusuario";
 
-            this.planesList.DataBind();
+            this.modulosList.DataValueField = "id";
+            this.usuariosList.DataValueField = "id";
+
+            this.modulosList.DataBind();
+            this.usuariosList.DataBind();
         }
 
-        private void ClearForm()
+        private Business.Entities.Usuario ObtenerUsuario(int indice)
         {
-            this.anioTextBox.Text = string.Empty;
-            this.descripcionTextBox.Text = string.Empty;
-            this.planesList.SelectedIndex = 0;
-        }
-        
-        private Business.Entities.Plan ObtenerPlan(int indice)
-        {
-            return new PlanLogic().GetAll()[indice];
+            return new UsuarioLogic().GetOne(indice);
         }
 
-        private void LoadEntity(Comision comision)
+        private void LoadEntity(ModuloUsuario modusr)
         {
-            Business.Entities.Plan planActual = ObtenerPlan(this.planesList.SelectedIndex);
-            comision.IDPlan = planActual.ID;
-            comision.AnioEspecialidad = Convert.ToInt32(this.anioTextBox.Text);
-            comision.Descripcion = this.descripcionTextBox.Text;
+            Business.Entities.Usuario usuarioActual = ObtenerUsuario(Convert.ToInt32(this.usuariosList.SelectedValue));
+            Business.Entities.Modulo moduloActual = ObtenerModulo(Convert.ToInt32(this.modulosList.SelectedValue));
+            modusr.IdModulo = moduloActual.ID;
+            modusr.IdUsuario = usuarioActual.ID;
+            modusr.PermiteAlta = this.altaCheck.Checked;
+            modusr.PermiteBaja = this.bajaCheck.Checked;
+            modusr.PermiteModificacion = this.modificacionCheck.Checked;
+            modusr.PermiteConsulta = this.consultaCheck.Checked;
         }
 
-        private void SaveEntity(Comision comision)
+        private Modulo ObtenerModulo(int indice)
         {
-            this.Logic.Save(comision);
+            return new ModuloLogic().GetOne(indice);
+        }
+
+        private void SaveEntity(ModuloUsuario modusr)
+        {
+            this.Logic.Save(modusr);
         }
 
         #endregion
@@ -151,7 +164,7 @@ namespace UI.Web
             if (!Page.IsPostBack)
             {
                 LoadGrid();
-                CargarPlanes();
+                CargarListas();
             }
             else
             {
@@ -182,7 +195,7 @@ namespace UI.Web
             {
                 case (FormModes.Modificacion):
                     {
-                        this.Entity = new Comision();
+                        this.Entity = new ModuloUsuario();
                         this.Entity.ID = this.SelectedID;
                         this.Entity.State = BusinessEntity.States.Modified;
                         this.LoadEntity(this.Entity);
@@ -198,14 +211,14 @@ namespace UI.Web
                     }
                 case (FormModes.Alta):
                     {
-                        this.Entity = new Comision();
+                        this.Entity = new ModuloUsuario();
                         this.LoadEntity(this.Entity);
                         this.SaveEntity(this.Entity);
                         this.LoadGrid();
                         break;
                     }
-                    default:
-                        break;
+                default:
+                    break;
             }
 
             this.formPanel.Visible = false;
@@ -229,6 +242,16 @@ namespace UI.Web
             this.FormMode = FormModes.Alta;
             this.ClearForm();
             this.EnableForm(true);
+        }
+
+        private void ClearForm()
+        {
+            this.modulosList.SelectedIndex = 0;
+            this.usuariosList.SelectedIndex = 0;
+            this.consultaCheck.Checked = false;
+            this.altaCheck.Checked = false;
+            this.bajaCheck.Checked = false;
+            this.modificacionCheck.Checked = false;
         }
 
         protected void cancelarLinkButton_Click(object sender, EventArgs e)

@@ -282,7 +282,7 @@ namespace Data.Database
             return personas;
         }
 
-        public object GetAllDocentes()
+        public List<Personas> GetAllDocentes()
         {
             List<Personas> personas = new List<Personas>();
 

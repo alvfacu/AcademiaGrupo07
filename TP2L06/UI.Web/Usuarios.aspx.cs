@@ -130,6 +130,10 @@ namespace UI.Web
             this.nombreUsuarioTextBox.Text = string.Empty;
             this.emailTextBox.Text = string.Empty;
             this.habilitadoCheckBox.Checked = false;
+            this.claveTextBox.Text = string.Empty;
+            this.repetirClaveTextBox.Text = string.Empty;
+            this.personasList.SelectedIndex = 0;
+
         }
 
 

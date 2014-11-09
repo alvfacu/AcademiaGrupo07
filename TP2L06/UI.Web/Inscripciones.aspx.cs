@@ -4,16 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Negocio;
 using Business.Entities;
+using Negocio;
 
 namespace UI.Web
 {
-    public partial class Comisiones : System.Web.UI.Page
+    public partial class Inscripciones : System.Web.UI.Page
     {
         #region Variables
 
-        ComisionLogic _logic;
+        AlumnoInsLogic _logic;
 
         public enum FormModes
         {
@@ -26,13 +26,13 @@ namespace UI.Web
 
         #region Propiedades
 
-        private ComisionLogic Logic
+        private AlumnoInsLogic Logic
         {
             get
             {
                 if (_logic == null)
                 {
-                    _logic = new ComisionLogic();
+                    _logic = new AlumnoInsLogic();
                 }
                 return _logic;
             }
@@ -44,7 +44,7 @@ namespace UI.Web
             set { this.ViewState["FormMode"] = value; }
         }
 
-        private Comision Entity
+        private AlumnoInscripcion Entity
         {
             get;
             set;
@@ -90,16 +90,18 @@ namespace UI.Web
         private void LoadForm(int id)
         {
             this.Entity = this.Logic.GetOne(id);
-            this.anioTextBox.Text = this.Entity.AnioEspecialidad.ToString();
-            this.descripcionTextBox.Text = this.Entity.Descripcion;
-            this.planesList.SelectedValue = this.Entity.IDPlan.ToString();
+            this.condicionTextBox.Text = this.Entity.Condicion;
+            this.notaTextBox.Text = this.Entity.Nota.ToString();
+            this.alumnosList.SelectedValue = this.Entity.IDAlumno.ToString();
+            this.cursoList.SelectedValue = this.Entity.IDCurso.ToString();
         }
 
         private void EnableForm(bool enable)
         {
-            this.anioTextBox.Enabled = enable;
-            this.descripcionTextBox.Enabled = enable;
-            this.planesList.Enabled = enable;
+            this.condicionTextBox.Enabled = enable;
+            this.notaTextBox.Enabled = enable;
+            this.alumnosList.Enabled = enable;
+            this.cursoList.Enabled = enable;
         }
 
         private void DeleteEntity(int id)
@@ -107,39 +109,53 @@ namespace UI.Web
             this.Logic.Delete(id);
         }
 
-        private void CargarPlanes()
+        private void CargarListas()
         {
-            this.planesList.DataSource = new PlanLogic().GetAll();
+            this.alumnosList.DataSource = new PersonaLogic().DevolverAlumnos();
+            this.cursoList.DataSource = new CursoLogic().GetAll();
 
-            this.planesList.DataTextField = "descripcion";
-            this.planesList.DataValueField = "id";
+            this.alumnosList.DataTextField = "nombre";
+            this.cursoList.DataTextField = "descripcion";
 
-            this.planesList.DataBind();
+            this.alumnosList.DataValueField = "id";
+            this.cursoList.DataValueField = "id";
+
+            this.alumnosList.DataBind();
+            this.cursoList.DataBind();
         }
 
         private void ClearForm()
         {
-            this.anioTextBox.Text = string.Empty;
-            this.descripcionTextBox.Text = string.Empty;
-            this.planesList.SelectedIndex = 0;
-        }
-        
-        private Business.Entities.Plan ObtenerPlan(int indice)
-        {
-            return new PlanLogic().GetAll()[indice];
+            this.condicionTextBox.Text = string.Empty;
+            this.notaTextBox.Text = string.Empty;
+            this.alumnosList.SelectedIndex = 0;
+            this.cursoList.SelectedIndex = 0;
         }
 
-        private void LoadEntity(Comision comision)
+
+        private Business.Entities.Personas ObtenerAlumno(int indice)
         {
-            Business.Entities.Plan planActual = ObtenerPlan(this.planesList.SelectedIndex);
-            comision.IDPlan = planActual.ID;
-            comision.AnioEspecialidad = Convert.ToInt32(this.anioTextBox.Text);
-            comision.Descripcion = this.descripcionTextBox.Text;
+            return new PersonaLogic().GetOne(indice);
         }
 
-        private void SaveEntity(Comision comision)
+        private void LoadEntity(AlumnoInscripcion inscripcion)
         {
-            this.Logic.Save(comision);
+            Business.Entities.Personas personaActual = ObtenerAlumno(Convert.ToInt32(this.alumnosList.SelectedValue));
+            Business.Entities.Curso cursoActual = ObtenerCurso(Convert.ToInt32(this.cursoList.SelectedValue));
+            inscripcion.IDAlumno = personaActual.ID;
+            inscripcion.IDCurso = cursoActual.ID;
+            inscripcion.Nota = Convert.ToInt32(this.notaTextBox.Text);
+            inscripcion.Condicion = this.condicionTextBox.Text;
+        }
+
+        private Curso ObtenerCurso(int indice)
+        {
+            return new CursoLogic().GetOne(indice);
+        }
+
+        private void SaveEntity(AlumnoInscripcion curso)
+        {
+            this.Logic.Save(curso);
         }
 
         #endregion
@@ -151,7 +167,7 @@ namespace UI.Web
             if (!Page.IsPostBack)
             {
                 LoadGrid();
-                CargarPlanes();
+                CargarListas();
             }
             else
             {
@@ -182,7 +198,7 @@ namespace UI.Web
             {
                 case (FormModes.Modificacion):
                     {
-                        this.Entity = new Comision();
+                        this.Entity = new AlumnoInscripcion();
                         this.Entity.ID = this.SelectedID;
                         this.Entity.State = BusinessEntity.States.Modified;
                         this.LoadEntity(this.Entity);
@@ -198,14 +214,14 @@ namespace UI.Web
                     }
                 case (FormModes.Alta):
                     {
-                        this.Entity = new Comision();
+                        this.Entity = new AlumnoInscripcion();
                         this.LoadEntity(this.Entity);
                         this.SaveEntity(this.Entity);
                         this.LoadGrid();
                         break;
                     }
-                    default:
-                        break;
+                default:
+                    break;
             }
 
             this.formPanel.Visible = false;

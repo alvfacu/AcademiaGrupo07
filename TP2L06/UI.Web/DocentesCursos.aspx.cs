@@ -9,11 +9,11 @@ using Business.Entities;
 
 namespace UI.Web
 {
-    public partial class Comisiones : System.Web.UI.Page
+    public partial class DocentesCursos : System.Web.UI.Page
     {
         #region Variables
 
-        ComisionLogic _logic;
+        DocenteLogic _logic;
 
         public enum FormModes
         {
@@ -26,13 +26,13 @@ namespace UI.Web
 
         #region Propiedades
 
-        private ComisionLogic Logic
+        private DocenteLogic Logic
         {
             get
             {
                 if (_logic == null)
                 {
-                    _logic = new ComisionLogic();
+                    _logic = new DocenteLogic();
                 }
                 return _logic;
             }
@@ -44,7 +44,7 @@ namespace UI.Web
             set { this.ViewState["FormMode"] = value; }
         }
 
-        private Comision Entity
+        private DocenteCurso Entity
         {
             get;
             set;
@@ -90,16 +90,16 @@ namespace UI.Web
         private void LoadForm(int id)
         {
             this.Entity = this.Logic.GetOne(id);
-            this.anioTextBox.Text = this.Entity.AnioEspecialidad.ToString();
-            this.descripcionTextBox.Text = this.Entity.Descripcion;
-            this.planesList.SelectedValue = this.Entity.IDPlan.ToString();
+            this.docentesList.SelectedValue = this.Entity.IDDocente.ToString();
+            this.cargosList.SelectedValue = this.Entity.Cargo.ToString();
+            this.cursoList.SelectedValue = this.Entity.IDCurso.ToString();
         }
 
         private void EnableForm(bool enable)
         {
-            this.anioTextBox.Enabled = enable;
-            this.descripcionTextBox.Enabled = enable;
-            this.planesList.Enabled = enable;
+            this.cursoList.Enabled = enable;
+            this.docentesList.Enabled = enable;
+            this.cargosList.Enabled = enable;
         }
 
         private void DeleteEntity(int id)
@@ -107,39 +107,45 @@ namespace UI.Web
             this.Logic.Delete(id);
         }
 
-        private void CargarPlanes()
+        private void CargarListas()
         {
-            this.planesList.DataSource = new PlanLogic().GetAll();
+            this.docentesList.DataSource = new PersonaLogic().DevolverDocentes();
+            this.cursoList.DataSource = new CursoLogic().GetAll();
+            this.cargosList.DataSource = new DocenteLogic().DevolverTiposCargos();
+            
+            this.docentesList.DataTextField = "nombre";
+            this.cursoList.DataTextField = "descripcion";
 
-            this.planesList.DataTextField = "descripcion";
-            this.planesList.DataValueField = "id";
+            this.docentesList.DataValueField = "id";
+            this.cursoList.DataValueField = "id";
 
-            this.planesList.DataBind();
+            this.docentesList.DataBind();
+            this.cursoList.DataBind();
+            this.cargosList.DataBind();
         }
 
-        private void ClearForm()
+        private Business.Entities.Personas ObtenerDocente(int indice)
         {
-            this.anioTextBox.Text = string.Empty;
-            this.descripcionTextBox.Text = string.Empty;
-            this.planesList.SelectedIndex = 0;
-        }
-        
-        private Business.Entities.Plan ObtenerPlan(int indice)
-        {
-            return new PlanLogic().GetAll()[indice];
+            return new PersonaLogic().GetOne(indice);
         }
 
-        private void LoadEntity(Comision comision)
+        private void LoadEntity(DocenteCurso docurso)
         {
-            Business.Entities.Plan planActual = ObtenerPlan(this.planesList.SelectedIndex);
-            comision.IDPlan = planActual.ID;
-            comision.AnioEspecialidad = Convert.ToInt32(this.anioTextBox.Text);
-            comision.Descripcion = this.descripcionTextBox.Text;
+            Business.Entities.Personas personaActual = ObtenerDocente(Convert.ToInt32(this.docentesList.SelectedValue));
+            Business.Entities.Curso cursoActual = ObtenerCurso(Convert.ToInt32(this.cursoList.SelectedValue));
+            docurso.IDDocente = personaActual.ID;
+            docurso.IDCurso = cursoActual.ID;
+            docurso.Cargo = (DocenteCurso.TiposCargos)Enum.Parse(typeof(DocenteCurso.TiposCargos), this.cargosList.SelectedValue);
         }
 
-        private void SaveEntity(Comision comision)
+        private Curso ObtenerCurso(int indice)
         {
-            this.Logic.Save(comision);
+            return new CursoLogic().GetOne(indice);
+        }
+
+        private void SaveEntity(DocenteCurso docurso)
+        {
+            this.Logic.Save(docurso);
         }
 
         #endregion
@@ -151,7 +157,7 @@ namespace UI.Web
             if (!Page.IsPostBack)
             {
                 LoadGrid();
-                CargarPlanes();
+                CargarListas();
             }
             else
             {
@@ -182,7 +188,7 @@ namespace UI.Web
             {
                 case (FormModes.Modificacion):
                     {
-                        this.Entity = new Comision();
+                        this.Entity = new DocenteCurso();
                         this.Entity.ID = this.SelectedID;
                         this.Entity.State = BusinessEntity.States.Modified;
                         this.LoadEntity(this.Entity);
@@ -198,14 +204,14 @@ namespace UI.Web
                     }
                 case (FormModes.Alta):
                     {
-                        this.Entity = new Comision();
+                        this.Entity = new DocenteCurso();
                         this.LoadEntity(this.Entity);
                         this.SaveEntity(this.Entity);
                         this.LoadGrid();
                         break;
                     }
-                    default:
-                        break;
+                default:
+                    break;
             }
 
             this.formPanel.Visible = false;
@@ -229,6 +235,13 @@ namespace UI.Web
             this.FormMode = FormModes.Alta;
             this.ClearForm();
             this.EnableForm(true);
+        }
+
+        private void ClearForm()
+        {
+            this.cargosList.SelectedIndex = 0;
+            this.cursoList.SelectedIndex = 0;
+            this.docentesList.SelectedIndex = 0;
         }
 
         protected void cancelarLinkButton_Click(object sender, EventArgs e)

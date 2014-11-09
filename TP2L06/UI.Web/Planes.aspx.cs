@@ -118,6 +118,7 @@ namespace UI.Web
         private void ClearForm()
         {
             this.descripcionTextBox.Text = string.Empty;
+            this.especiliadadesList.SelectedIndex = 0;
         }
 
         private Business.Entities.Especialidad ObtenerPlan(int indice)

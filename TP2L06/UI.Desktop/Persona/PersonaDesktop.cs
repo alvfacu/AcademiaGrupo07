@@ -229,7 +229,7 @@ namespace UI.Desktop
 
         private void PersonaDesktop_Load(object sender, EventArgs e)
         {
-            List<String> listaTipos = Business.Entities.Personas.DevolverTiposPersonas();
+            List<String> listaTipos = new PersonaLogic().DevolverTiposPersonas();
             cmbTiposPersonas.DataSource = listaTipos;
 
             cmbPlan.DataSource = new PlanLogic().GetAll();

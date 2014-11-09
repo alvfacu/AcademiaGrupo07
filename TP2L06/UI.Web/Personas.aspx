@@ -10,9 +10,13 @@
         <Columns>
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
             <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
+            <asp:BoundField HeaderText="Legajo" DataField="Legajo" />
+            <asp:BoundField HeaderText="ID Plan" DataField="IDPlan" />
+            <asp:BoundField HeaderText="Tipo de Persona" DataField="TipoPersona" />
+            <asp:BoundField HeaderText="Fecha de Nacimiento" DataField="FechaNacimiento" />
+            <asp:BoundField HeaderText="Direccion" DataField="Direccion" />
+            <asp:BoundField HeaderText="Telefono" DataField="Telefono" />
             <asp:BoundField HeaderText="EMail" DataField="EMail" />
-            <asp:BoundField HeaderText="Usuario" DataField="NombreUsuario" />
-            <asp:BoundField HeaderText="Habilitado" DataField="Habilitado" />
             <asp:CommandField SelectText="Seleccionar" ShowSelectButton="True" />
         </Columns>
     </asp:GridView>
@@ -34,48 +38,64 @@
 <br />
 
 <asp:Panel ID="formPanel" Visible="false" runat="server">
-    <asp:Label ID="apeNomLabel" runat="server" Text="Nombre y Apellido: "></asp:Label>
-    <asp:DropDownList ID="personasList" runat=server></asp:DropDownList>
+    <asp:Label ID="nombreLabel" runat="server" Text="Nombre: "></asp:Label>
+    <asp:TextBox ID="nombreTextBox" runat=server></asp:TextBox>
+    <asp:RequiredFieldValidator ID="NombreRequerido" runat="server" ControlToValidate="nombreTextBox"  
+       ErrorMessage='El nombre no puede estar vacío' EnableClientScript="true" SetFocusOnError="true" Text="*" ForeColor=Red></asp:RequiredFieldValidator>
     <br />
-    <asp:Label ID="emailLabel" runat="server" Text="EMail: "></asp:Label>
+    <asp:Label ID="apellidoLabel" runat="server" Text="Apellido: "></asp:Label>
+    <asp:TextBox ID="apellidoTextBox" runat=server></asp:TextBox>
+    <asp:RequiredFieldValidator ID="ApellidoRequerido" runat="server" ControlToValidate="apellidoTextBox"  
+       ErrorMessage='El apellido no puede estar vacío' EnableClientScript="true" SetFocusOnError="true" Text="*" ForeColor=Red></asp:RequiredFieldValidator>
+    <br />
+    <asp:Label ID="legajoLabel" runat="server" Text="Legajo: "></asp:Label>
+    <asp:TextBox ID="legajoTextBox" runat=server></asp:TextBox>
+    <asp:RequiredFieldValidator ID="LegajoRequerido" runat="server" ControlToValidate="legajoTextBox"  
+       ErrorMessage='El legajo no puede estar vacío' EnableClientScript="true" SetFocusOnError="true" Text="*" ForeColor=Red></asp:RequiredFieldValidator>
+    <br />
+    <asp:Label ID="planLabel" runat=server Text="Plan: "></asp:Label>
+    <asp:DropDownList ID="planesList" runat=server></asp:DropDownList>
+    <br />
+    <asp:Label ID="tiposLabel" runat=server Text="Tipo de Persona: "></asp:Label>
+    <asp:DropDownList ID="tiposList" runat=server ></asp:DropDownList>
+    <br />
+    <asp:Label ID="fechaLabel" runat=server Text="Fecha de Nacimiento: "></asp:Label>
+    &nbsp;<asp:Label ID="diaLabel" runat=server Text="Día: "></asp:Label>
+    &nbsp;<asp:DropDownList ID="diasList" runat="server" />
+    &nbsp;<asp:Label ID="mesLabel" runat=server Text="Mes: "></asp:Label>
+    &nbsp;<asp:DropDownList ID="mesesList" runat="server" onchange = "PopulateDays()" />
+    &nbsp;<asp:Label ID="anioLabel" runat=server Text="Año: "></asp:Label>
+    &nbsp;<asp:DropDownList ID="aniosList" runat="server" onchange = "PopulateDays()" />
+    <br />
+    <asp:Label ID="direccionLabel" runat="server" Text="Dirección: "></asp:Label>
+    <asp:TextBox ID="direccionTextBox" runat=server></asp:TextBox>
+    <asp:RequiredFieldValidator ID="DireccionRequerida" runat="server" ControlToValidate="direccionTextBox"  
+       ErrorMessage='La dirección no puede estar vacía' EnableClientScript="true" SetFocusOnError="true" Text="*" ForeColor=Red></asp:RequiredFieldValidator>
+    <br />
+    <asp:Label ID="telefonoLabel" runat=server Text="Telefono: "></asp:Label>
+    <asp:TextBox ID="telefonoTextBox" runat=server></asp:TextBox>
+    <asp:RequiredFieldValidator ID="TelefonoRequerido" runat="server" ControlToValidate="telefonoTextBox"  
+       ErrorMessage='El telefono no puede estar vacío' EnableClientScript="true" SetFocusOnError="true" Text="*" ForeColor=Red></asp:RequiredFieldValidator>
+    <br />
+    <asp:Label ID="emailLabel" runat=server Text="EMail: "></asp:Label>
     <asp:TextBox ID="emailTextBox" runat=server></asp:TextBox>
-    <asp:RequiredFieldValidator ID="EmailRequerido" runat="server" ControlToValidate="emailTextBox"  
-       ErrorMessage='El email no puede estar vacío' EnableClientScript="true" SetFocusOnError="true" Text="*" ForeColor=Red></asp:RequiredFieldValidator>
     <asp:RegularExpressionValidator ID="EmailInvalido" runat="server" ControlToValidate="emailTextBox" ErrorMessage="El email es inválido" 
        EnableClientScript=true SetFocusOnError="true" Text="*" ForeColor=Red
        ValidationExpression="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
     </asp:RegularExpressionValidator>
     <br />
-    <asp:Label ID="habilitadoLabel" runat="server" Text="Habilitado: "></asp:Label>
-    <asp:CheckBox ID="habilitadoCheckBox" runat="server" />
-    <br />
-    <asp:Label ID="nombreUsuarioLabel" runat="server" Text="Usuario: "></asp:Label>
-    <asp:TextBox ID="nombreUsuarioTextBox" runat=server></asp:TextBox>
-    <asp:RequiredFieldValidator ID="UsuarioRequerido" runat="server" ControlToValidate="nombreUsuarioTextBox"  
-       ErrorMessage='El nombre de usuario no puede estar vacío' EnableClientScript="true" SetFocusOnError="true" Text="*" ForeColor=Red></asp:RequiredFieldValidator>
-    <br />
-    <asp:Label ID="claveLabel" runat="server" Text="Clave: "></asp:Label>
-    <asp:TextBox ID="claveTextBox" TextMode=Password runat=server></asp:TextBox>
-    <asp:RequiredFieldValidator ID="ClaveRequerido" runat="server" ControlToValidate="claveTextBox"  
-       ErrorMessage='La clave no puede estar vacía' EnableClientScript="true" SetFocusOnError="true" Text="*" ForeColor=Red></asp:RequiredFieldValidator>
-    <br />
-    <asp:Label ID="repetirClaveLabel" runat="server" Text="Repetir Clave: "></asp:Label>
-    <asp:TextBox ID="repetirClaveTextBox" TextMode=Password runat=server></asp:TextBox>
-    <asp:RequiredFieldValidator ID="RepetirClaveRequerido" runat="server" ControlToValidate="repetirClaveTextBox"  
-       ErrorMessage='Debe confirmar la clave' EnableClientScript="true" SetFocusOnError="true" Text="*" ForeColor=Red></asp:RequiredFieldValidator>
-    <asp:CompareValidator ID="CompararClave" runat=server  ControlToCompare="claveTextBox" ControlToValidate="repetirClaveTextBox" Text="*"
-       ErrorMessage='Las claves no coinciden' ForeColor=Red></asp:CompareValidator>
+    <br />    
 </asp:Panel>
 
 <asp:Panel ID="formActionsPanel" runat=server>
-    <asp:LinkButton ID="aceptarLinkButton" runat=server 
+    <asp:LinkButton ID="aceptarLinkButton" runat=server
         onclick="aceptarLinkButton_Click">Aceptar</asp:LinkButton>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:LinkButton ID="cancelarLinkButton" runat=server CausesValidation="False"
         onclick="cancelarLinkButton_Click">Cancelar</asp:LinkButton>
-</asp:Panel>
-<br />
-<br />
+    &nbsp;&nbsp;</asp:Panel>
+    <br />
+
 <asp:ValidationSummary ID="ResumenValidaciones" ForeColor=Red runat="server" HeaderText="Los siguientes errores ocurrieron:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" /> 
 
 

@@ -131,6 +131,8 @@ namespace UI.Web
             this.descripcionTextBox.Text = string.Empty;
             this.anioTextBox.Text = string.Empty;
             this.cupoTextBox.Text = string.Empty;
+            this.comisionesList.SelectedIndex = 0;
+            this.materiasList.SelectedIndex = 0;
         }
 
 

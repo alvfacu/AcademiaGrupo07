@@ -4,16 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Negocio;
 using Business.Entities;
+using Negocio;
 
 namespace UI.Web
 {
-    public partial class Comisiones : System.Web.UI.Page
+    public partial class Materias : System.Web.UI.Page
     {
         #region Variables
 
-        ComisionLogic _logic;
+        MateriaLogic _logic;
 
         public enum FormModes
         {
@@ -26,13 +26,13 @@ namespace UI.Web
 
         #region Propiedades
 
-        private ComisionLogic Logic
+        private MateriaLogic Logic
         {
             get
             {
                 if (_logic == null)
                 {
-                    _logic = new ComisionLogic();
+                    _logic = new MateriaLogic();
                 }
                 return _logic;
             }
@@ -44,7 +44,7 @@ namespace UI.Web
             set { this.ViewState["FormMode"] = value; }
         }
 
-        private Comision Entity
+        private Materia Entity
         {
             get;
             set;
@@ -90,16 +90,18 @@ namespace UI.Web
         private void LoadForm(int id)
         {
             this.Entity = this.Logic.GetOne(id);
-            this.anioTextBox.Text = this.Entity.AnioEspecialidad.ToString();
             this.descripcionTextBox.Text = this.Entity.Descripcion;
+            this.semanalesTextBox.Text = this.Entity.HSSemanales.ToString();
+            this.totalesTextBox.Text = this.Entity.HSTotales.ToString();
             this.planesList.SelectedValue = this.Entity.IDPlan.ToString();
         }
 
         private void EnableForm(bool enable)
         {
-            this.anioTextBox.Enabled = enable;
-            this.descripcionTextBox.Enabled = enable;
             this.planesList.Enabled = enable;
+            this.totalesTextBox.Enabled = enable;
+            this.semanalesTextBox.Enabled = enable;
+            this.descripcionTextBox.Enabled = enable;
         }
 
         private void DeleteEntity(int id)
@@ -107,39 +109,31 @@ namespace UI.Web
             this.Logic.Delete(id);
         }
 
-        private void CargarPlanes()
+        private void CargarListas()
         {
             this.planesList.DataSource = new PlanLogic().GetAll();
-
             this.planesList.DataTextField = "descripcion";
             this.planesList.DataValueField = "id";
-
-            this.planesList.DataBind();
+            this.DataBind();
         }
 
-        private void ClearForm()
-        {
-            this.anioTextBox.Text = string.Empty;
-            this.descripcionTextBox.Text = string.Empty;
-            this.planesList.SelectedIndex = 0;
-        }
-        
         private Business.Entities.Plan ObtenerPlan(int indice)
         {
-            return new PlanLogic().GetAll()[indice];
+            return new PlanLogic().GetOne(indice);
         }
 
-        private void LoadEntity(Comision comision)
+        private void LoadEntity(Materia mat)
         {
-            Business.Entities.Plan planActual = ObtenerPlan(this.planesList.SelectedIndex);
-            comision.IDPlan = planActual.ID;
-            comision.AnioEspecialidad = Convert.ToInt32(this.anioTextBox.Text);
-            comision.Descripcion = this.descripcionTextBox.Text;
+            Business.Entities.Plan planActual = ObtenerPlan(Convert.ToInt32(this.planesList.SelectedValue));
+            mat.Descripcion = this.descripcionTextBox.Text;
+            mat.HSSemanales = Convert.ToInt32(this.semanalesTextBox.Text);
+            mat.HSTotales = Convert.ToInt32(this.totalesTextBox.Text);
+            mat.IDPlan = planActual.ID;            
         }
 
-        private void SaveEntity(Comision comision)
+        private void SaveEntity(Materia mat)
         {
-            this.Logic.Save(comision);
+            this.Logic.Save(mat);
         }
 
         #endregion
@@ -151,7 +145,7 @@ namespace UI.Web
             if (!Page.IsPostBack)
             {
                 LoadGrid();
-                CargarPlanes();
+                CargarListas();
             }
             else
             {
@@ -182,7 +176,7 @@ namespace UI.Web
             {
                 case (FormModes.Modificacion):
                     {
-                        this.Entity = new Comision();
+                        this.Entity = new Materia();
                         this.Entity.ID = this.SelectedID;
                         this.Entity.State = BusinessEntity.States.Modified;
                         this.LoadEntity(this.Entity);
@@ -198,14 +192,14 @@ namespace UI.Web
                     }
                 case (FormModes.Alta):
                     {
-                        this.Entity = new Comision();
+                        this.Entity = new Materia();
                         this.LoadEntity(this.Entity);
                         this.SaveEntity(this.Entity);
                         this.LoadGrid();
                         break;
                     }
-                    default:
-                        break;
+                default:
+                    break;
             }
 
             this.formPanel.Visible = false;
@@ -229,6 +223,14 @@ namespace UI.Web
             this.FormMode = FormModes.Alta;
             this.ClearForm();
             this.EnableForm(true);
+        }
+
+        private void ClearForm()
+        {
+            this.totalesTextBox.Text = string.Empty;
+            this.semanalesTextBox.Text = string.Empty;
+            this.descripcionTextBox.Text = string.Empty;
+            this.planesList.SelectedIndex = 0;
         }
 
         protected void cancelarLinkButton_Click(object sender, EventArgs e)

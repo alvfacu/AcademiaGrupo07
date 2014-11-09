@@ -12,7 +12,7 @@
             <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
             <asp:BoundField HeaderText="EMail" DataField="EMail" />
             <asp:BoundField HeaderText="Usuario" DataField="NombreUsuario" />
-            <asp:BoundField HeaderText="Habilitado" DataField="Habilitado" />
+            <asp:CheckBoxField HeaderText="Habilitado" DataField="Habilitado" />
             <asp:CommandField SelectText="Seleccionar" ShowSelectButton="True" />
         </Columns>
     </asp:GridView>
@@ -55,12 +55,13 @@
        ErrorMessage='El nombre de usuario no puede estar vacío' EnableClientScript="true" SetFocusOnError="true" Text="*" ForeColor=Red></asp:RequiredFieldValidator>
     <br />
     <asp:Label ID="claveLabel" runat="server" Text="Clave: "></asp:Label>
-    <asp:TextBox ID="claveTextBox" TextMode=Password runat=server></asp:TextBox>
+    <asp:TextBox ID="claveTextBox" runat=server></asp:TextBox>
     <asp:RequiredFieldValidator ID="ClaveRequerido" runat="server" ControlToValidate="claveTextBox"  
        ErrorMessage='La clave no puede estar vacía' EnableClientScript="true" SetFocusOnError="true" Text="*" ForeColor=Red></asp:RequiredFieldValidator>
+    &nbsp;&nbsp;&nbsp;
     <br />
     <asp:Label ID="repetirClaveLabel" runat="server" Text="Repetir Clave: "></asp:Label>
-    <asp:TextBox ID="repetirClaveTextBox" TextMode=Password runat=server></asp:TextBox>
+    <asp:TextBox ID="repetirClaveTextBox" runat=server></asp:TextBox>
     <asp:RequiredFieldValidator ID="RepetirClaveRequerido" runat="server" ControlToValidate="repetirClaveTextBox"  
        ErrorMessage='Debe confirmar la clave' EnableClientScript="true" SetFocusOnError="true" Text="*" ForeColor=Red></asp:RequiredFieldValidator>
     <asp:CompareValidator ID="CompararClave" runat=server  ControlToCompare="claveTextBox" ControlToValidate="repetirClaveTextBox" Text="*"
