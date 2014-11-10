@@ -114,7 +114,7 @@ namespace UI.Web
             catch (ErrorEliminar ex)
             {
                 this.errorPanel.Visible = true;
-                this.formPanel.Visible = false;
+                this.usuarioPanel.Visible = false;
                 this.mensajeError.Text = ex.Message;
                 this.aceptarLinkButton.Enabled = false;
             }
@@ -175,23 +175,42 @@ namespace UI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            if (((Usuario)Session["logueo"]).Per.TipoPersona != Business.Entities.Personas.TiposPersonas.Administrador)
             {
-                LoadGrid();
-                CargarListas();                
+                CargarListas();
+                if (!Page.IsPostBack)
+                {
+                    this.adminPanel.Visible = false;
+                    this.usuarioPanel.Visible = true;
+                }
+                else
+                {
+                    this.errorPanel.Visible = false;
+                    this.aceptarLinkButton.Enabled = true;
+                    this.usuarioPanel.Visible = true;
+                }
             }
             else
             {
-                LoadGrid();
-                this.errorPanel.Visible = false;
-                this.aceptarLinkButton.Enabled = true;
-            }
+                if (!Page.IsPostBack)
+                {
+                    LoadGrid();
+                    CargarListas();
+                }
+                else
+                {
+                    LoadGrid();
+                    this.errorPanel.Visible = false;
+                    this.aceptarLinkButton.Enabled = true;
+                }
+            } 
+
         }
 
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.SelectedID = (int)this.gridView.SelectedValue;
-            this.formPanel.Visible = false;
+            this.usuarioPanel.Visible = false;
         }
 
         protected void editarLinkButton_Click(object sender, EventArgs e)
@@ -199,7 +218,7 @@ namespace UI.Web
             if (this.IsEntitySelected)
             {
                 this.EnableForm(true);
-                this.formPanel.Visible = true;
+                this.usuarioPanel.Visible = true;
                 this.FormMode = FormModes.Modificacion;
                 this.LoadForm(this.SelectedID);
             }
@@ -259,7 +278,7 @@ namespace UI.Web
         {
             if (this.IsEntitySelected)
             {
-                this.formPanel.Visible = true;
+                this.usuarioPanel.Visible = true;
                 this.EnableForm(false);
                 this.aceptarLinkButton.CausesValidation = false;
                 this.LoadForm(this.SelectedID);
@@ -269,7 +288,7 @@ namespace UI.Web
 
         protected void nuevoLinkButton_Click(object sender, EventArgs e)
         {
-            this.formPanel.Visible = true;
+            this.usuarioPanel.Visible = true;
             this.FormMode = FormModes.Alta;
             this.ClearForm();
             this.EnableForm(true);
@@ -277,7 +296,14 @@ namespace UI.Web
 
         protected void cancelarLinkButton_Click(object sender, EventArgs e)
         {
-            this.formPanel.Visible = false;
+            if (((Usuario)Session["logueo"]).Per.TipoPersona == Business.Entities.Personas.TiposPersonas.Administrador)
+            {
+                this.usuarioPanel.Visible = false;
+            }
+            else
+            {
+                Response.Redirect("Default.aspx");
+            }
         }
 
         #endregion

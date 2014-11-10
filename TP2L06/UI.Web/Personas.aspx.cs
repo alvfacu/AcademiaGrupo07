@@ -199,7 +199,7 @@ namespace UI.Web
             catch (ErrorEliminar ex)
             {
                 this.errorPanel.Visible = true;
-                this.formPanel.Visible = false;
+                this.usuarioPanel.Visible = false;
                 this.mensajeError.Text = ex.Message;
                 this.aceptarLinkButton.Enabled = false;
             }
@@ -249,15 +249,18 @@ namespace UI.Web
             lt.Text = "DD";
             lt.Value = "0";
             this.diasList.Items.Add(lt);
-            int days = DateTime.DaysInMonth(this.Year, this.Month);
-            for (int i = 1; i <= days; i++)
+            if (this.Year != 0 && this.Month != 0)
             {
-                lt = new ListItem();
-                lt.Text = i.ToString();
-                lt.Value = i.ToString();
-                this.diasList.Items.Add(lt);
+                int days = DateTime.DaysInMonth(this.Year, this.Month);
+                for (int i = 1; i <= days; i++)
+                {
+                    lt = new ListItem();
+                    lt.Text = i.ToString();
+                    lt.Value = i.ToString();
+                    this.diasList.Items.Add(lt);
+                }
+                this.diasList.Items.FindByValue(DateTime.Now.Day.ToString()).Selected = true;
             }
-            this.diasList.Items.FindByValue(DateTime.Now.Day.ToString()).Selected = true;
         }
 
         private void PopulateMonth()
@@ -314,36 +317,68 @@ namespace UI.Web
         #region Eventos
 
         protected void Page_Load(object sender, EventArgs e)
-        {            
-            if (!Page.IsPostBack)
+        {
+
+            if (((Usuario)Session["logueo"]).Per.TipoPersona != Business.Entities.Personas.TiposPersonas.Administrador)
             {
-                LoadGrid();
-                CargarListas();
-                if (this.SelectedDate == DateTime.MinValue)
+                if (!Page.IsPostBack)
                 {
-                    this.PopulateYear();
-                    this.PopulateMonth();
-                    this.PopulateDay();
+                    CargarListas();
+                    if (this.SelectedDate == DateTime.MinValue)
+                    {
+                        this.PopulateYear();
+                        this.PopulateMonth();
+                        this.PopulateDay();
+                    }
+                    this.adminPanel.Visible = false;
+                    this.usuarioPanel.Visible = true;
+                }
+                else
+                {
+                    if (Request.Form[this.diasList.UniqueID] != null)
+                    {
+                        this.PopulateDay();
+                        this.diasList.ClearSelection();
+                        this.diasList.Items.FindByValue(Request.Form[this.diasList.UniqueID]).Selected = true;
+                    }
+                    this.errorPanel.Visible = false;
+                    this.aceptarLinkButton.Enabled = true;
+                    this.usuarioPanel.Visible = true;
                 }
             }
             else
             {
-                if (Request.Form[this.diasList.UniqueID] != null)
+                if (!Page.IsPostBack)
                 {
-                    this.PopulateDay();
-                    this.diasList.ClearSelection();
-                    this.diasList.Items.FindByValue(Request.Form[this.diasList.UniqueID]).Selected = true;
+                    LoadGrid();
+                    CargarListas();
+                    if (this.SelectedDate == DateTime.MinValue)
+                    {
+                        this.PopulateYear();
+                        this.PopulateMonth();
+                        this.PopulateDay();
+                    }
                 }
-                LoadGrid();
-                this.errorPanel.Visible = false;
-                this.aceptarLinkButton.Enabled = true;
-            }
+                else
+                {
+                    LoadGrid();
+                    if (Request.Form[this.diasList.UniqueID] != null)
+                    {
+                        this.PopulateDay();
+                        this.diasList.ClearSelection();
+                        this.diasList.Items.FindByValue(Request.Form[this.diasList.UniqueID]).Selected = true;
+                    }
+                    this.errorPanel.Visible = false;
+                    this.aceptarLinkButton.Enabled = true;
+                }
+            }      
+                        
         }
 
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.SelectedID = (int)this.gridView.SelectedValue;
-            this.formPanel.Visible = false;
+            this.usuarioPanel.Visible = false;
         }
 
         protected void editarLinkButton_Click(object sender, EventArgs e)
@@ -351,7 +386,7 @@ namespace UI.Web
             if (this.IsEntitySelected)
             {
                 this.EnableForm(true);
-                this.formPanel.Visible = true;
+                this.usuarioPanel.Visible = true;
                 this.FormMode = FormModes.Modificacion;
                 this.LoadForm(this.SelectedID);
             }
@@ -396,7 +431,7 @@ namespace UI.Web
         {
             if (this.IsEntitySelected)
             {
-                this.formPanel.Visible = true;
+                this.usuarioPanel.Visible = true;
                 this.EnableForm(false);
                 this.LoadForm(this.SelectedID);
                 this.FormMode = FormModes.Baja;
@@ -405,7 +440,7 @@ namespace UI.Web
 
         protected void nuevoLinkButton_Click(object sender, EventArgs e)
         {
-            this.formPanel.Visible = true;
+            this.usuarioPanel.Visible = true;
             this.FormMode = FormModes.Alta;
             this.ClearForm();
             this.EnableForm(true);
@@ -413,7 +448,14 @@ namespace UI.Web
 
         protected void cancelarLinkButton_Click(object sender, EventArgs e)
         {
-            this.formPanel.Visible = false;
+            if (((Usuario)Session["logueo"]).Per.TipoPersona == Business.Entities.Personas.TiposPersonas.Administrador)
+            {
+                this.usuarioPanel.Visible = false;
+            }
+            else
+            {
+                Response.Redirect("Default.aspx");
+            }
         }
 
         #endregion

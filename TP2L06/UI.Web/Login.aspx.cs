@@ -22,7 +22,7 @@ namespace UI.Web
 
             if (usuarioActual == null)
             {
-                this.Label1.Text = "Ingreso incorrecto!!";
+                this.Label1.Text = "Ingreso incorrecto. Verifique haber ingresado correctamente los datos del loguin.";
             }
             else
             {

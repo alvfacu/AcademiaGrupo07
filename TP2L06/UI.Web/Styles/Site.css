@@ -42,6 +42,22 @@
 {
     font:Verdana;
     color:Maroon;
-    height:400px;
+    height:600px auto;
     background-color:#FFFBD6;
+}
+
+.error
+{
+    text-align:center;
+    color:Red;
+    font-weight:bold;       
+}
+
+.formulario
+{
+    border-style: solid;
+    border-color: Navy;
+    margin-left:100px;
+    margin-right:100px;
+    background-color:White;    
 }

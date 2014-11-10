@@ -22,7 +22,6 @@ namespace UI.Web
                     usuarioLabel.Text = (((Usuario)Session["logueo"]).Per.Nombre)+" "+(((Usuario)Session["logueo"]).Per.Apellido);
                 }
             }
-
         }
 
         protected void linkHome_Click(object sender, EventArgs e)

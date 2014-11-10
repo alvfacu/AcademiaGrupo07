@@ -13,6 +13,15 @@ namespace UI.Web {
     public partial class Inscripciones {
         
         /// <summary>
+        /// adminPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel adminPanel;
+        
+        /// <summary>
         /// gridPanel control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton nuevoLinkButton;
+        
+        /// <summary>
+        /// usuarioPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel usuarioPanel;
         
         /// <summary>
         /// formPanel control.
@@ -202,6 +220,15 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.Label mensajeError;
         
         /// <summary>
+        /// ResumenValidaciones control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ResumenValidaciones;
+        
+        /// <summary>
         /// formActionsPanel control.
         /// </summary>
         /// <remarks>
@@ -227,14 +254,5 @@ namespace UI.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton cancelarLinkButton;
-        
-        /// <summary>
-        /// ResumenValidaciones control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ResumenValidaciones;
     }
 }

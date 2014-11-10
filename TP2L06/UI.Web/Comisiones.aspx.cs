@@ -112,7 +112,7 @@ namespace UI.Web
             catch (ErrorEliminar ex)
             {
                 this.errorPanel.Visible = true;
-                this.formPanel.Visible = false;
+                this.usuarioPanel.Visible = false;
                 this.mensajeError.Text = ex.Message;
                 this.aceptarLinkButton.Enabled = false;
             }
@@ -159,24 +159,42 @@ namespace UI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            if (((Usuario)Session["logueo"]).Per.TipoPersona != Business.Entities.Personas.TiposPersonas.Administrador)
             {
-                LoadGrid();
-                CargarPlanes();
+                if (!Page.IsPostBack)
+                {
+                    CargarPlanes();
+                    this.adminPanel.Visible = false;
+                    this.usuarioPanel.Visible = true;
+                }
+                else
+                {
+                    this.errorPanel.Visible = false;
+                    this.aceptarLinkButton.Enabled = true;
+                    this.usuarioPanel.Visible = true;
+                }
             }
             else
             {
-                LoadGrid();
-                this.errorPanel.Visible = false;
-                this.aceptarLinkButton.Enabled = true;
-
+                if (!Page.IsPostBack)
+                {
+                    LoadGrid();
+                    CargarPlanes();
+                }
+                else
+                {
+                    LoadGrid();
+                    this.errorPanel.Visible = false;
+                    this.aceptarLinkButton.Enabled = true;
+                    this.usuarioPanel.Visible = true;
+                }
             }
         }
 
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.SelectedID = (int)this.gridView.SelectedValue;
-            this.formPanel.Visible = false;
+            this.usuarioPanel.Visible = false;
         }
 
         protected void editarLinkButton_Click(object sender, EventArgs e)
@@ -247,7 +265,14 @@ namespace UI.Web
 
         protected void cancelarLinkButton_Click(object sender, EventArgs e)
         {
-            this.formPanel.Visible = false;
+            if (((Usuario)Session["logueo"]).Per.TipoPersona == Business.Entities.Personas.TiposPersonas.Administrador)
+            {
+                this.usuarioPanel.Visible = false;
+            }
+            else
+            {
+                Response.Redirect("Default.aspx");
+            }
         }
 
         #endregion
