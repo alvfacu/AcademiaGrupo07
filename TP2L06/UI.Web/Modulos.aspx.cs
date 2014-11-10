@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Negocio;
 using Business.Entities;
+using Util;
 
 namespace UI.Web
 {
@@ -100,7 +101,17 @@ namespace UI.Web
 
         private void DeleteEntity(int id)
         {
-            this.Logic.Delete(id);
+            try
+            {
+                this.Logic.Delete(id);
+            }
+            catch (ErrorEliminar ex)
+            {
+                this.errorPanel.Visible = true;
+                this.formPanel.Visible = false;
+                this.mensajeError.Text = ex.Message;
+                this.aceptarLinkButton.Enabled = false;
+            }
         }
 
         private void ClearForm()
@@ -130,6 +141,8 @@ namespace UI.Web
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadGrid();
+            this.errorPanel.Visible = false;
+            this.aceptarLinkButton.Enabled = true;
         }
 
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)

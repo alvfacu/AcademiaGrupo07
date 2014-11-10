@@ -34,6 +34,11 @@
     <asp:TextBox ID="descripcionTextBox" runat=server></asp:TextBox>
     <asp:RequiredFieldValidator ID="DescripcionRequerida" runat="server" ControlToValidate="descripcionTextBox"  
        ErrorMessage='Se requerie alguna descripción' EnableClientScript="true" SetFocusOnError="true" Text="*" ForeColor=Red></asp:RequiredFieldValidator>
+       <br />
+</asp:Panel>
+
+<asp:Panel ID="errorPanel" runat=server Visible=false>
+<asp:Label ID="mensajeError" runat=server ForeColor=Red></asp:Label>
 </asp:Panel>
 
 <asp:Panel ID="formActionsPanel" runat=server>

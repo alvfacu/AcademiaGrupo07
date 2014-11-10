@@ -166,6 +166,42 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator NotaRequerida;
         
         /// <summary>
+        /// noCupoPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel noCupoPanel;
+        
+        /// <summary>
+        /// noCupoLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label noCupoLabel;
+        
+        /// <summary>
+        /// errorPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel errorPanel;
+        
+        /// <summary>
+        /// mensajeError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label mensajeError;
+        
+        /// <summary>
         /// formActionsPanel control.
         /// </summary>
         /// <remarks>

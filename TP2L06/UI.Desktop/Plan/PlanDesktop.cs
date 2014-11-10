@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Business.Entities;
 using Negocio;
+using Util;
 
 namespace UI.Desktop
 {
@@ -74,8 +75,16 @@ namespace UI.Desktop
 
         public virtual void GuardarCambios()
         {
-            MapearADatos();
-            new PlanLogic().Save(PlanActual);
+            try
+            {
+                MapearADatos();
+                new PlanLogic().Save(PlanActual);
+            }
+            catch (ErrorEliminar ex)
+            {
+                //ErrorEliminar miExcep = new ErrorEliminar("No se puede eliminar el plan.");
+                Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         
         public virtual void MapearADatos() 
@@ -148,9 +157,7 @@ namespace UI.Desktop
         public void Notificar(string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
         {
             this.Notificar(this.Text, mensaje, botones, icono);
-        }
-        
-        
+        }       
         
 
         #endregion

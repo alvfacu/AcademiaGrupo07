@@ -10,96 +10,105 @@
 namespace UI.Web {
     
     
-    public partial class SiteMaster {
+    public partial class Login {
         
         /// <summary>
-        /// bodyForm control.
+        /// headerLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm bodyForm;
+        protected global::System.Web.UI.WebControls.Panel headerLogin;
         
         /// <summary>
-        /// linkHome control.
+        /// ResumenValidaciones control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkHome;
+        protected global::System.Web.UI.WebControls.ValidationSummary ResumenValidaciones;
         
         /// <summary>
-        /// imagen control.
+        /// panelLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imagen;
+        protected global::System.Web.UI.WebControls.Panel panelLogin;
         
         /// <summary>
-        /// ingresar control.
+        /// usuarioLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ingresar;
+        protected global::System.Web.UI.WebControls.Label usuarioLabel;
         
         /// <summary>
-        /// panelUsuario control.
+        /// usuarioTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelUsuario;
+        protected global::System.Web.UI.WebControls.TextBox usuarioTextBox;
         
         /// <summary>
-        /// nombreUsr control.
+        /// UsuarioRequerido control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label nombreUsr;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator UsuarioRequerido;
         
         /// <summary>
-        /// salir control.
+        /// claveLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton salir;
+        protected global::System.Web.UI.WebControls.Label claveLabel;
         
         /// <summary>
-        /// menu control.
+        /// claveTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Menu menu;
+        protected global::System.Web.UI.WebControls.TextBox claveTextBox;
         
         /// <summary>
-        /// bodyContentPlaceHolder control.
+        /// ClaveRequerida control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder bodyContentPlaceHolder;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ClaveRequerida;
         
         /// <summary>
-        /// autoresLabel control.
+        /// ingresarButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label autoresLabel;
+        protected global::System.Web.UI.WebControls.Button ingresarButton;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
     }
 }

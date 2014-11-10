@@ -171,7 +171,7 @@
             this.Name = "formPrincipal";
             this.Text = "Principal";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            //this.Shown += new System.EventHandler(this.formPrincipal_Shown);
+            this.Load += new System.EventHandler(this.formPrincipal_Load);
             this.mnsPrincipal.ResumeLayout(false);
             this.mnsPrincipal.PerformLayout();
             this.ResumeLayout(false);

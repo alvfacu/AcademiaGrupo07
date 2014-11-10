@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Negocio;
 using Business.Entities;
+using Util;
 
 namespace UI.Web
 {
@@ -191,7 +192,17 @@ namespace UI.Web
 
         private void DeleteEntity(int id)
         {
-            this.Logic.Delete(id);
+            try
+            {
+                this.Logic.Delete(id);
+            }
+            catch (ErrorEliminar ex)
+            {
+                this.errorPanel.Visible = true;
+                this.formPanel.Visible = false;
+                this.mensajeError.Text = ex.Message;
+                this.aceptarLinkButton.Enabled = false;
+            }
         }
 
         private void CargarListas()
@@ -317,13 +328,15 @@ namespace UI.Web
             }
             else
             {
-                LoadGrid();
                 if (Request.Form[this.diasList.UniqueID] != null)
                 {
                     this.PopulateDay();
                     this.diasList.ClearSelection();
                     this.diasList.Items.FindByValue(Request.Form[this.diasList.UniqueID]).Selected = true;
                 }
+                LoadGrid();
+                this.errorPanel.Visible = false;
+                this.aceptarLinkButton.Enabled = true;
             }
         }
 

@@ -28,6 +28,7 @@
     &nbsp;&nbsp;
     <asp:LinkButton ID="nuevoLinkButton" runat=server 
         onclick="nuevoLinkButton_Click">Nuevo</asp:LinkButton>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </asp:Panel>
 
 <br />
@@ -51,7 +52,16 @@
     <asp:RegularExpressionValidator runat="server" ValidationExpression="\d+" ControlToValidate="notaTextBox" 
         ErroMessage='La nota debe ser un número entero' EnableClientScript="true" SetFocusOnError="true" Text="*" ForeColor=Red></asp:RegularExpressionValidator>
     <br />
+    </asp:Panel>
+
+<asp:Panel ID="noCupoPanel" runat=server Visible=false>
+<asp:Label ID="noCupoLabel" runat="server" ForeColor=Red></asp:Label>
 </asp:Panel>
+
+<asp:Panel ID="errorPanel" runat=server Visible=false>
+<asp:Label ID="mensajeError" runat=server ForeColor=Red></asp:Label>
+</asp:Panel>
+
 
 <asp:Panel ID="formActionsPanel" runat=server>
     <asp:LinkButton ID="aceptarLinkButton" runat=server

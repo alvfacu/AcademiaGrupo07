@@ -83,8 +83,16 @@ namespace UI.Desktop
 
         public virtual void GuardarCambios()
         {
-            MapearADatos();
-            new PersonaLogic().Save(PersonaActual);
+            try
+            {
+                MapearADatos();
+                new PersonaLogic().Save(PersonaActual);
+            }
+            catch (ErrorEliminar ex)
+            {
+                //ErrorEliminar miExcep = new ErrorEliminar("No se puede eliminar la persona.");
+                Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public virtual void MapearADatos()

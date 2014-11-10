@@ -103,6 +103,7 @@
             this.dgvInscripciones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInscripciones.Location = new System.Drawing.Point(3, 3);
             this.dgvInscripciones.Name = "dgvInscripciones";
+            this.dgvInscripciones.ReadOnly = true;
             this.dgvInscripciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInscripciones.Size = new System.Drawing.Size(539, 197);
             this.dgvInscripciones.TabIndex = 0;
@@ -112,30 +113,35 @@
             this.ID.DataPropertyName = "ID";
             this.ID.HeaderText = "ID";
             this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
             // 
             // IDAlu
             // 
             this.IDAlu.DataPropertyName = "IDAlumno";
             this.IDAlu.HeaderText = "ID Alumno";
             this.IDAlu.Name = "IDAlu";
+            this.IDAlu.ReadOnly = true;
             // 
             // IDCurso
             // 
             this.IDCurso.DataPropertyName = "IDCurso";
             this.IDCurso.HeaderText = "ID Curso";
             this.IDCurso.Name = "IDCurso";
+            this.IDCurso.ReadOnly = true;
             // 
             // Condicion
             // 
             this.Condicion.DataPropertyName = "Condicion";
             this.Condicion.HeaderText = "Condición";
             this.Condicion.Name = "Condicion";
+            this.Condicion.ReadOnly = true;
             // 
             // Nota
             // 
             this.Nota.DataPropertyName = "Nota";
             this.Nota.HeaderText = "Nota";
             this.Nota.Name = "Nota";
+            this.Nota.ReadOnly = true;
             // 
             // btnActualizar
             // 

@@ -40,7 +40,10 @@
     <asp:Label ID="cargoLabel" runat="server" Text="Cargo: "></asp:Label>
     <asp:DropDownList ID="cargosList" runat=server></asp:DropDownList>
     <br />
-    <br />
+</asp:Panel>
+
+<asp:Panel ID="errorPanel" runat=server Visible=false>
+<asp:Label ID="mensajeError" runat=server ForeColor=Red></asp:Label>
 </asp:Panel>
 
 <asp:Panel ID="formActionsPanel" runat=server>

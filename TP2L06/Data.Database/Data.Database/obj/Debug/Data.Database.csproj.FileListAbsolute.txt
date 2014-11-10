@@ -40,3 +40,5 @@ C:\Users\Facundo\Desktop\Net\TP2\TP2L06\Data.Database\Data.Database\bin\Debug\Bu
 C:\Users\Facundo\Desktop\Net\TP2\TP2L06\Data.Database\Data.Database\obj\Debug\Data.Database.csprojResolveAssemblyReference.cache
 C:\Users\Facundo\Desktop\Net\TP2\TP2L06\Data.Database\Data.Database\obj\Debug\Data.Database.dll
 C:\Users\Facundo\Desktop\Net\TP2\TP2L06\Data.Database\Data.Database\obj\Debug\Data.Database.pdb
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\Data.Database\Data.Database\bin\Debug\Util.dll
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\Data.Database\Data.Database\bin\Debug\Util.pdb

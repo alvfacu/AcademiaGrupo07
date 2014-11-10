@@ -28,7 +28,7 @@ namespace UI.Desktop
             this.Dispose();
         }
 
-        /*private void formPrincipal_Shown(object sender, EventArgs e)
+        private void formPrincipal_Load(object sender, EventArgs e)
         {
             Login formLogin = new Login();
             if (formLogin.ShowDialog() != DialogResult.OK)
@@ -44,7 +44,7 @@ namespace UI.Desktop
         private void HabilitarOpciones()
         {
             throw new NotImplementedException();
-        }*/
+        }
                 
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {

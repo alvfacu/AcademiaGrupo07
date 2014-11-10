@@ -80,13 +80,21 @@ namespace UI.Desktop
 
         public virtual void GuardarCambios()
         {
-            MapearADatos();
-            new UsuarioLogic().Save(UsuarioActual);
+            try
+            {
+                MapearADatos();
+                new UsuarioLogic().Save(UsuarioActual);
+            }
+            catch (ErrorEliminar ex)
+            {
+                //ErrorEliminar miExcep = new ErrorEliminar("No se puede eliminar la inscripción.");
+                Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         
         public virtual void MapearADatos() 
         {
-            Business.Entities.Personas personaActual = this.DevolverPersona();
+            Business.Entities.Personas personaActual = this.ObtenerPersona();
             switch (this.Modo)
             {
                 case (ModoForm.Alta):
@@ -118,6 +126,7 @@ namespace UI.Desktop
                     {
                         this.UsuarioActual.State = BusinessEntity.States.Deleted;
                         break;
+                        
                     }
                 case (ModoForm.Consulta):
                     {
@@ -125,6 +134,11 @@ namespace UI.Desktop
                         break;
                     }
             }
+        }
+
+        private Business.Entities.Personas ObtenerPersona()
+        {
+            return new PersonaLogic().GetOne(((Business.Entities.Personas)this.cmbPersonas.SelectedValue).ID);
         }
        
         public virtual bool Validar() 
@@ -211,8 +225,6 @@ namespace UI.Desktop
             }
         }
 
-        #endregion
-
         private void UsuarioDesktop_Load(object sender, EventArgs e)
         {
             cmbPersonas.DataSource = new PersonaLogic().DevolverPersonasPorApeNom();
@@ -222,10 +234,8 @@ namespace UI.Desktop
 
         }
 
-        private Business.Entities.Personas DevolverPersona()
-        {
-            return new PersonaLogic().GetOne(((Business.Entities.Personas)this.cmbPersonas.SelectedValue).ID);
-        }
+        #endregion
+
 
     }
 }

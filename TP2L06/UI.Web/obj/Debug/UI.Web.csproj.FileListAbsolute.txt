@@ -9,3 +9,5 @@ C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\bin\Business.Entities.pdb
 C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\bin\Negocio.pdb
 C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\bin\Data.Database.pdb
 C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\obj\Debug\UI.Web.csprojResolveAssemblyReference.cache
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\bin\Util.dll
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Web\bin\Util.pdb

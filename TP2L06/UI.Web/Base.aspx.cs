@@ -36,8 +36,33 @@ namespace UI.Web
             }
         }
 
+        public void DeshabilitarOpciones()
+        {
+            var menu = (Menu)Page.Master.FindControl("menu");
+            if (menu != null && (Session["logueo"] == null))
+            {
+                HabilitarOpciones(menu, false);
+            }
+            else if ((Session["logueo"] != null))
+            {
+                HabilitarOpciones(menu, true);
+            }
+        }
 
-
+        public void HabilitarOpciones(Menu menu, bool enable)
+        {
+            menu.FindItem("Usuarios").Enabled = enable;
+            menu.FindItem("Comisiones").Enabled = enable;
+            menu.FindItem("Planes").Enabled = enable;
+            menu.FindItem("Especialidades").Enabled = enable;
+            menu.FindItem("Modulos").Enabled = enable;
+            menu.FindItem("Cursos").Enabled = enable;
+            menu.FindItem("Inscripciones").Enabled = enable;
+            menu.FindItem("Docentes - Cursos").Enabled = enable;
+            menu.FindItem("Materias").Enabled = enable;
+            menu.FindItem("Modulos Usuario").Enabled = enable;
+            menu.FindItem("Personas").Enabled = enable;            
+        }
 
     }
 }

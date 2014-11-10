@@ -4,6 +4,7 @@ using System.Text;
 using Business.Entities;
 using System.Data;
 using System.Data.SqlClient;
+using Util;
 
 namespace Data.Database
 {
@@ -107,9 +108,8 @@ namespace Data.Database
             }
             catch (Exception Ex)
             {
-                Exception ExcepcionManejada =
-                new Exception("Error al eliminar usuario", Ex);
-                throw ExcepcionManejada;
+                ErrorEliminar miExcep = new ErrorEliminar("No se puede eliminar el usuario.");
+                throw miExcep;
             }
             finally
             {
@@ -131,7 +131,7 @@ namespace Data.Database
             {
                 this.Update(usuario);
             }
-            usuario.State = BusinessEntity.States.Unmodified;            
+            usuario.State = BusinessEntity.States.Unmodified;
         }
 
         protected void Update(Usuario usuario)
@@ -199,7 +199,7 @@ namespace Data.Database
        
         public Usuario GetOneByUsuario(string nombreUsr)
         {
-            Usuario usr = new Usuario();
+            Usuario usr = null;
 
             try
             {
@@ -212,6 +212,7 @@ namespace Data.Database
 
                 if (drUsuarios.Read())
                 {
+                    usr = new Usuario();
                     usr.ID = (int)drUsuarios["id_usuario"];
                     usr.NombreUsuario = (string)drUsuarios["nombre_usuario"];
                     usr.Clave = (string)drUsuarios["clave"];
@@ -239,35 +240,6 @@ namespace Data.Database
             return usr;
         }
 
-        //Prueba para sin IDPersona
-        public void UpdateDos(Usuario usuario)
-        {
-            try
-            {
-                this.OpenConnection();
-
-                SqlCommand cmdSave = new SqlCommand("UPDATE usuarios SET nombre_usuario=@nombre_usuario, clave=@clave, " +
-                    "habilitado=@habilitado, nombre=@nombre, apellido=@apellido, email=@email " +
-                    "WHERE id_usuario=@id", sqlConn);
-
-                cmdSave.Parameters.Add("@id", SqlDbType.Int).Value = usuario.ID;
-                cmdSave.Parameters.Add("@nombre_usuario", SqlDbType.VarChar, 50).Value = usuario.NombreUsuario;
-                cmdSave.Parameters.Add("@clave", SqlDbType.VarChar, 50).Value = usuario.Clave;
-                cmdSave.Parameters.Add("@habilitado", SqlDbType.Bit).Value = usuario.Habilitado;
-                cmdSave.Parameters.Add("@nombre", SqlDbType.VarChar, 50).Value = usuario.Nombre;
-                cmdSave.Parameters.Add("@apellido", SqlDbType.VarChar, 50).Value = usuario.Apellido;
-                cmdSave.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = usuario.EMail;
-                cmdSave.ExecuteReader();
-            }
-            catch (Exception Ex)
-            {
-                Exception ExcepcionManejada = new Exception("Error al modificar datos del usuario", Ex);
-                throw ExcepcionManejada;
-            }
-            finally
-            {
-                this.CloseConnection();
-            }
-        }
+       
     }
 }

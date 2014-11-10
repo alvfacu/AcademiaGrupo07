@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Negocio;
 using Business.Entities;
+using Util;
 
 namespace UI.Desktop
 {
@@ -73,8 +74,16 @@ namespace UI.Desktop
 
         public virtual void GuardarCambios()
         {
-            MapearADatos();
-            new ModuloLogic().Save(ModuloActual);
+            try
+            {
+                MapearADatos();
+                new ModuloLogic().Save(ModuloActual);
+            }
+            catch (ErrorEliminar ex)
+            {
+                //ErrorEliminar miExcep = new ErrorEliminar("No se puede eliminar el módulo.");
+                Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         
         public virtual void MapearADatos() 

@@ -76,6 +76,10 @@
       <Project>{D659AFA7-5652-40B7-A152-CBF275CFBF4F}</Project>
       <Name>Business.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\TP2L01\Util\Util.csproj">
+      <Project>{4756A909-2C02-4A02-BB80-704F890E01F3}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

@@ -337,6 +337,24 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator EmailInvalido;
         
         /// <summary>
+        /// errorPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel errorPanel;
+        
+        /// <summary>
+        /// mensajeError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label mensajeError;
+        
+        /// <summary>
         /// formActionsPanel control.
         /// </summary>
         /// <remarks>

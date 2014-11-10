@@ -5,6 +5,7 @@ using System.Text;
 using Business.Entities;
 using System.Data;
 using System.Data.SqlClient;
+using Util;
 
 namespace Data.Database
 {
@@ -94,9 +95,8 @@ namespace Data.Database
             }
             catch (Exception Ex)
             {
-                Exception ExcepcionManejada =
-                new Exception("Error al eliminar modulo", Ex);
-                throw ExcepcionManejada;
+                ErrorEliminar miExp = new ErrorEliminar("No se puede eliminar el módulo.", Ex);
+                throw miExp;
             }
             finally
             {

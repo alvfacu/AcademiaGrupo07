@@ -61,6 +61,10 @@
     <br />
 </asp:Panel>
 
+<asp:Panel ID="errorPanel" runat=server Visible=false>
+<asp:Label ID="mensajeError" runat=server ForeColor=Red></asp:Label>
+</asp:Panel>
+
 <asp:Panel ID="formActionsPanel" runat=server>
     <asp:LinkButton ID="aceptarLinkButton" runat=server 
         onclick="aceptarLinkButton_Click">Aceptar</asp:LinkButton>

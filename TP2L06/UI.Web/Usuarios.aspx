@@ -66,6 +66,11 @@
        ErrorMessage='Debe confirmar la clave' EnableClientScript="true" SetFocusOnError="true" Text="*" ForeColor=Red></asp:RequiredFieldValidator>
     <asp:CompareValidator ID="CompararClave" runat=server  ControlToCompare="claveTextBox" ControlToValidate="repetirClaveTextBox" Text="*"
        ErrorMessage='Las claves no coinciden' ForeColor=Red></asp:CompareValidator>
+       <br />
+</asp:Panel>
+
+<asp:Panel ID="errorPanel" runat=server Visible=false>
+<asp:Label ID="mensajeError" runat=server ForeColor=Red></asp:Label>
 </asp:Panel>
 
 <asp:Panel ID="formActionsPanel" runat=server>

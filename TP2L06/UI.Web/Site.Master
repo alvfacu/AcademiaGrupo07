@@ -2,18 +2,26 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head runat="server">
-        <title>Academia</title>
+        <title>Sistema de Gestión Académica (SGA)</title>
+        <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <form id="bodyForm" runat="server">
-        <div>
+    <form id="bodyForm" runat="server">
+        <div class=cabecera>
         <asp:LinkButton ID="linkHome" runat=server onclick="linkHome_Click" 
                 ToolTip="Bienvenido a la Academia">
             <asp:Image runat=server ID="imagen" ImageUrl="~/Images/TunedIn_BooksfromtheBanner_large.jpg" /> 
-        </asp:LinkButton>
+        </asp:LinkButton>        
+        <div class=link>
+        <asp:LinkButton ID="ingresar" runat=server Text="Ingresar" onclick="ingresar_Click"></asp:LinkButton>
+        <asp:Panel ID="panelUsuario" runat=server Visible=false>
+            Bievenido <asp:Label ID="nombreUsr" runat=server onclick="usuario_Click"></asp:Label> !
+        <asp:LinkButton ID="salir" runat=server Text="Salir" onclick="salir_Click"></asp:LinkButton>
+        </asp:Panel>
+        </div>        
         </div>
-        <div>
-            <asp:Menu runat="server" ID="menu" Orientation="Horizontal"
+        <div class=menu>
+            <asp:Menu runat="server" ID="menu" Orientation="Horizontal" 
                 BackColor="#FFFBD6" DynamicHorizontalOffset="2" 
                 Font-Names="Verdana" Font-Size="0.8em" ForeColor="#990000" 
                 StaticSubMenuIndent="10px" >
@@ -40,8 +48,9 @@
                  </Items>
             </asp:Menu>
         </div>
-        <div>
-            <asp:ContentPlaceHolder ID="bodyContentPlaceHolder" runat="server"></asp:ContentPlaceHolder>
+        <div class=content>
+            <asp:ContentPlaceHolder ID="bodyContentPlaceHolder" runat="server">
+            </asp:ContentPlaceHolder>
         </div>
         <div>
             <asp:Label ID="autoresLabel" runat=server BackColor="#FFFBD6" DynamicHorizontalOffset="2" 

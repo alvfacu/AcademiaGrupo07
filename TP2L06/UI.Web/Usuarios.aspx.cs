@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Business.Entities;
 using Negocio;
+using Util;
 
 namespace UI.Web
 {
@@ -112,7 +113,17 @@ namespace UI.Web
         
         private void DeleteEntity(int id)
         {
-            this.Logic.Delete(id);
+            try
+            {
+                this.Logic.Delete(id);
+            }
+            catch (ErrorEliminar ex)
+            {
+                this.errorPanel.Visible = true;
+                this.formPanel.Visible = false;
+                this.mensajeError.Text = ex.Message;
+                this.aceptarLinkButton.Enabled = false;
+            }
         }
         
         private void CargarPersonas()
@@ -133,10 +144,8 @@ namespace UI.Web
             this.claveTextBox.Text = string.Empty;
             this.repetirClaveTextBox.Text = string.Empty;
             this.personasList.SelectedIndex = 0;
-
         }
-
-
+        
         private Business.Entities.Personas ObtenerPersona(int indice)
         {
             return new PersonaLogic().GetOne(indice);
@@ -165,15 +174,27 @@ namespace UI.Web
              
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                LoadGrid();
-                CargarPersonas();
-            }
-            else
-            {
-                LoadGrid();
-            }
+            CargarPersonas();
+            //if (((Usuario)Session["logueo"]).Per.TipoPersona == Business.Entities.Personas.TiposPersonas.Alumno)
+            //{
+            //    this.EnableForm(true);
+            //    this.formPanel.Visible = true;
+            //    this.FormMode = FormModes.Modificacion;
+            //    this.LoadForm(((Usuario)Session["logueo"]).ID);
+            //}
+            //else
+            //{
+                if (!Page.IsPostBack)
+                {
+                    LoadGrid();
+                }
+                else
+                {
+                    LoadGrid();
+                    this.errorPanel.Visible = false;
+                    this.aceptarLinkButton.Enabled = true;
+                }
+            //}
         }
 
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)

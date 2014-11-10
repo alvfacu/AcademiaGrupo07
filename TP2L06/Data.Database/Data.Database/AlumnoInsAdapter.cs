@@ -5,6 +5,7 @@ using System.Text;
 using Business.Entities;
 using System.Data;
 using System.Data.SqlClient;
+using Util;
 
 namespace Data.Database
 {
@@ -117,9 +118,8 @@ namespace Data.Database
             }
             catch (Exception Ex)
             {
-                Exception ExcepcionManejada =
-                new Exception("Error al eliminar inscripción", Ex);
-                throw ExcepcionManejada;
+                ErrorEliminar miExp = new ErrorEliminar("No se puede eliminar la inscripción.", Ex);
+                throw miExp;
             }
             finally
             {
@@ -200,6 +200,27 @@ namespace Data.Database
             inscripcion.State = BusinessEntity.States.Unmodified;
         }
 
-
+        public int DevolverCantidadInscripciones(int IDCurso)
+        {
+            int cantidad = 0;
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdCount = new SqlCommand("SELECT COUNT(*) FROM alumnos_inscripciones WHERE id_curso=@id", sqlConn);
+                cmdCount.Parameters.Add("@id", SqlDbType.Int).Value = IDCurso;
+                cantidad = (int)cmdCount.ExecuteScalar();
+            }
+            catch (Exception Ex)
+            {
+                Console.WriteLine(Ex.Message);
+                Exception ExcepcionManejada = new Exception("Error al crear inscripción", Ex);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+            return cantidad;
+        }
     }
 }

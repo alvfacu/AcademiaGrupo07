@@ -47,6 +47,11 @@
     <br />
     <asp:Label ID="planLabel" runat=server Text="Plan: "></asp:Label>
     <asp:DropDownList ID="planesList" runat=server></asp:DropDownList>
+    <br />
+</asp:Panel>
+
+<asp:Panel ID="errorPanel" runat=server Visible=false>
+<asp:Label ID="mensajeError" runat=server ForeColor=Red></asp:Label>
 </asp:Panel>
 
 <asp:Panel ID="formActionsPanel" runat=server>

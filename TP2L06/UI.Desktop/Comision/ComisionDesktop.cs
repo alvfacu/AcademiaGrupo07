@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Negocio;
 using Business.Entities;
+using Util;
 
 namespace UI.Desktop
 {
@@ -75,8 +76,15 @@ namespace UI.Desktop
 
         public virtual void GuardarCambios()
         {
-            MapearADatos();
-            new ComisionLogic().Save(ComisionActual);
+            try
+            {
+                MapearADatos();
+                new ComisionLogic().Save(ComisionActual);
+            }
+            catch (ErrorEliminar ex)
+            {
+                Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public virtual void MapearADatos()

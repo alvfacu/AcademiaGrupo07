@@ -64,3 +64,5 @@ C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Consola\bin\Debug\Data.Database.pdb
 C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Consola\obj\x86\Debug\UI.Consola.csprojResolveAssemblyReference.cache
 C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Consola\obj\x86\Debug\UI.Consola.exe
 C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Consola\obj\x86\Debug\UI.Consola.pdb
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Consola\bin\Debug\Util.dll
+C:\Users\Facundo\Desktop\Net\TP2\TP2L06\UI.Consola\bin\Debug\Util.pdb

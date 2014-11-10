@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Business.Entities;
 using Negocio;
+using Util;
 
 namespace UI.Desktop
 {
@@ -74,35 +75,64 @@ namespace UI.Desktop
         }
 
         public virtual void GuardarCambios()
-        {
-            MapearADatos();
-            new AlumnoInsLogic().Save(AluInscripcionActual);
+        {            
+            try
+            {
+                MapearADatos();
+                if (AluInscripcionActual != null)
+                {
+                    new AlumnoInsLogic().Save(AluInscripcionActual);
+                }
+            }
+            catch (ErrorEliminar ex)
+            {
+                Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         
         public virtual void MapearADatos() 
         {
+
             Business.Entities.Curso cursoActual = this.DevolverCurso();
             Business.Entities.Personas personaActual = this.DevolverPersona();            
             switch (this.Modo)
             {
                 case (ModoForm.Alta):
                     {
-                        AluInscripcionActual = new AlumnoInscripcion();
-                        this.AluInscripcionActual.IDAlumno = personaActual.ID;
-                        this.AluInscripcionActual.IDCurso = cursoActual.ID;
-                        this.AluInscripcionActual.Condicion = this.txtCondicion.Text;
-                        this.AluInscripcionActual.Nota = int.Parse(this.txtNota.Text);
-                        this.AluInscripcionActual.State = BusinessEntity.States.New;
-                        break; 
+                        if (new AlumnoInsLogic().HayCupo(((Business.Entities.Curso)this.cmbIDCurso.SelectedValue).ID))
+                        {
+                            AluInscripcionActual = new AlumnoInscripcion();
+                            this.AluInscripcionActual.IDAlumno = personaActual.ID;
+                            this.AluInscripcionActual.IDCurso = cursoActual.ID;
+                            this.AluInscripcionActual.Condicion = this.txtCondicion.Text;
+                            this.AluInscripcionActual.Nota = int.Parse(this.txtNota.Text);
+                            this.AluInscripcionActual.State = BusinessEntity.States.New;
+                            break; 
+                        }
+                        else
+                        {
+                            AluInscripcionActual = null;
+                            Notificar("Error", "Error a la hora de inscribirse. No hay cupo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
                     }
                 case (ModoForm.Modificacion):
                     {
-                        this.AluInscripcionActual.IDAlumno = personaActual.ID;
-                        this.AluInscripcionActual.IDCurso = cursoActual.ID;
-                        this.AluInscripcionActual.Condicion = this.txtCondicion.Text;
-                        this.AluInscripcionActual.Nota = int.Parse(this.txtNota.Text);
-                        this.AluInscripcionActual.State = BusinessEntity.States.Modified;
-                        break;
+                        if (new AlumnoInsLogic().HayCupo(((Business.Entities.Curso)this.cmbIDCurso.SelectedValue).ID))
+                        {
+                            this.AluInscripcionActual.IDAlumno = personaActual.ID;
+                            this.AluInscripcionActual.IDCurso = cursoActual.ID;
+                            this.AluInscripcionActual.Condicion = this.txtCondicion.Text;
+                            this.AluInscripcionActual.Nota = int.Parse(this.txtNota.Text);
+                            this.AluInscripcionActual.State = BusinessEntity.States.Modified;
+                            break;
+                        }
+                        else
+                        {
+                            Notificar("Error", "Error a la hora de inscribirse. No hay cupo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
+
                     }
                 case (ModoForm.Baja):
                     {
@@ -126,23 +156,7 @@ namespace UI.Desktop
         {
             return new CursoLogic().GetOne(((Business.Entities.Curso)this.cmbIDCurso.SelectedValue).ID);
         }
-
-        private int DevolverIDCurso(string p)
-        {
-            List<Curso> cursos = new CursoLogic().GetAll();
-            int id = 0;
-
-            foreach (Curso cur in cursos)
-            {
-                if (String.Compare(p, cur.Descripcion, true) == 0)
-                {
-                    id = cur.ID;
-                }
-            }
-
-            return id;
-        }
-       
+               
         public virtual bool Validar() 
         { 
             int nro;

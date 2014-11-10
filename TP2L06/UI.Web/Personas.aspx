@@ -83,8 +83,11 @@
        EnableClientScript=true SetFocusOnError="true" Text="*" ForeColor=Red
        ValidationExpression="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
     </asp:RegularExpressionValidator>
-    <br />
     <br />    
+</asp:Panel>
+
+<asp:Panel ID="errorPanel" runat=server Visible=false>
+<asp:Label ID="mensajeError" runat=server ForeColor=Red></asp:Label>
 </asp:Panel>
 
 <asp:Panel ID="formActionsPanel" runat=server>
